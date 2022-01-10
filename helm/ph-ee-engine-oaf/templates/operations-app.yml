@@ -5,6 +5,8 @@ metadata:
   name: "ph-ee-operations-app"
   labels:
     app: ph-ee-operations-app
+  annotations:
+    checksum/config: {{ include (print $.Template.BasePath "/ph-ee-config.yaml") . | sha256sum }}
 spec:
   replicas: 1
   selector:

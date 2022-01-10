@@ -6,6 +6,8 @@ metadata:
   name: ph-ee-importer-rdbms
   labels:
     app: ph-ee-importer-rdbms
+  annotations:
+    checksum/config: {{ include (print $.Template.BasePath "/ph-ee-config.yaml") . | sha256sum }}
 spec:
   replicas: 1
   selector:
