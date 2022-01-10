@@ -16,9 +16,9 @@ name: PaymentHub_$(Date:yyyyMMdd)$(Rev:.r)
 steps:
 
   - script: |
-    # Lint
-    helm dependency update helm/ph-ee-engine-oaf
-    helm lint helm/ph-ee-engine-oaf
+      # Lint
+      helm dependency update helm/ph-ee-engine-oaf
+      helm lint helm/ph-ee-engine-oaf
 
   - task: HelmDeploy@0
     displayName: Package Helm Chart
