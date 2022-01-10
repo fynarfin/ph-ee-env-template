@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ph-ee-config
+  namespace: paymenthub
+data:
+  application-bb.properties: >-
+    ams.local.interop.host=https://rhino.mifos.io:8443
+    ams.local.customer.host=https://rhino.mifos.io:8443
+    zeebe.broker.contactpoint=zeebe-zeebe-gateway:26500
+    security.oauth2.resource.jwt.key-uri=http://bb-identity.mifos.io/oauth/token_key
+    rest.authorization.enabled=false
+    rest.authorization.host=http://bb-identity.mifos.io
+    dfspids=tn03,tn04
+    token.client.channel.secret=p1234
+  application-fin12.properties: |-
+    ams.localenabled=true
+    zeebe.broker.contactpoint=zeebe-zeebe-gateway:26500
