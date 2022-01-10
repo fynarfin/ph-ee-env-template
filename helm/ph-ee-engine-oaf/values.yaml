@@ -122,12 +122,12 @@ channel:
 operations_app:
   SPRING_PROFILES_ACTIVE: "med"
   hostname: "paymenthub.qa.oneacrfund.org"
-  image: ""
+  image: "oaftech.azurecr.io/phee-ns/ph-ee-operations-app"
 
 operations_web:
   hostname: "paymenthub.qa.oneacrfund.org"
   webhost: "paymenthub.qa.oneacrfund.org"
-  image: ""
+  image: "oaftech.azurecr.io/phee-ns/ph-ee-operations-web"
 
 identity:
     hostname: "paymenthub.qa.oneacrfund.org"
