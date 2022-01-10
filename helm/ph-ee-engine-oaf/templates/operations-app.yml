@@ -14,8 +14,6 @@ spec:
     metadata:
       labels:
         app: ph-ee-operations-app
-      annotations:
-        deployTime: "{{ .Values.deployTime }}"
     spec:
 
       containers:

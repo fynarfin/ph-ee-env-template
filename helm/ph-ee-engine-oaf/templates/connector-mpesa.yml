@@ -13,8 +13,6 @@ spec:
     metadata:
       labels:
         app: ph-ee-connector-mpesa
-      annotations:
-        deployTime: "{{ .Values.deployTime }}"
     spec:
       containers:
         - name: ph-ee-connector-mpesa

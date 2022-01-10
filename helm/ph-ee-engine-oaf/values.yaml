@@ -117,7 +117,7 @@ zeebe:
 channel:
   SPRING_PROFILES_ACTIVE: "med"
   hostname: "paymenthub.qa.oneacrfund.org"
-  image: ""
+  image: "oaftech.azurecr.io/phee-ns/ph-ee-connector-channel"
 
 operations_app:
   SPRING_PROFILES_ACTIVE: "med"
@@ -135,17 +135,17 @@ identity:
 
 mpesa:
   SPRING_PROFILES_ACTIVE: "med"
-  image: ""
+  image: "oaftech.azurecr.io/phee-ns/ph-ee-connector-mpesa"
   hostname: "paymenthub.qa.oneacrfund.org"
 
 # pesa core connector
 roster_connector: 
   SPRING_PROFILES_ACTIVE: "med"
-  image: ""
+  image: "oaftech.azurecr.io/phee-ns/ph-ee-connector-ams-pesa"
 
 notifications:
   SPRING_PROFILES_ACTIVE: "med"
-  image: ""
+  image: "oaftech.azurecr.io/phee-ns/ph-ee-notifications"
   hostname: "paymenthub.qa.oneacrfund.org"
 
 zeebe_ops:
@@ -153,11 +153,11 @@ zeebe_ops:
   hostname: "paymenthub.qa.oneacrfund.org"
 
 messagegateway:
-  image: ""
+  image: "oaftech.azurecr.io/phee-ns/message-gateway"
   hostname: "paymenthub.qa.oneacrfund.org"
 
 importer_es:
-  image: ""
+  image: "oaftech.azurecr.io/phee-ns/ph-ee-importer-es"
 
 importer_rdbms:
-  image: ""
+  image: "oaftech.azurecr.io/phee-ns/ph-ee-importer-rdbms"
