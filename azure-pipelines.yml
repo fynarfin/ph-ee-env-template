@@ -19,6 +19,7 @@ steps:
       # Lint
       helm dependency update helm/ph-ee-engine-oaf
       helm lint helm/ph-ee-engine-oaf
+    displayName: Helm lint
 
   - task: HelmDeploy@0
     displayName: Package Helm Chart

@@ -37,31 +37,6 @@ spec:
             name: ph-ee-config
 
 ---
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: ph-ee-connector-channel
-  annotations:
-    kubernetes.io/ingress.class: "kong"
-    konghq.com/strip-path: "true"
-spec:
-  rules:
-    - host: "{{ .Values.channel.hostname }}"
-      http:
-        paths:
-        - path: /channel
-          pathType: Prefix
-          backend:
-            service:
-              name: ph-ee-connector-channel
-              port: 
-                number: 80
-  tls:
-    - hosts:
-        - "*.qa.oneacrefund.org"
-      secretName: oafqa-tls
-
----
 apiVersion: v1
 kind: Service
 metadata:

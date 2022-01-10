@@ -50,27 +50,3 @@ spec:
     app: ph-ee-connector-mpesa
   sessionAffinity: None
   type: ClusterIP
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: ph-ee-connector-mpesa
-  annotations:
-    kubernetes.io/ingress.class: "kong"
-    konghq.com/strip-path: "true"
-spec:
-  rules:
-    - host: "{{ .Values.mpesa.hostname }}"
-      http:
-        paths:
-          - path: /mpesa
-            pathType: Prefix
-            backend:
-              service:
-                name: ph-ee-connector-mpesa
-                port: 
-                  number: 80
-  tls:
-    - hosts:
-        - "*.qa.oneacrefund.org"
-      secretName: oafqa-tls
