@@ -104,14 +104,13 @@ kibana:
   fullnameOverride: "ph-ee-kibana"
   elasticsearchHosts: "http://ph-ee-elasticsearch:9200/"
 
-operations:
-  enabled: true
-
-operationsMysql:
+ysql:
   fullnameOverride: operations-mysql
+  enabled: true
   auth:
     username: mifos
     password: password
+    rootPassword: root
 
 zeebe:
     broker:
