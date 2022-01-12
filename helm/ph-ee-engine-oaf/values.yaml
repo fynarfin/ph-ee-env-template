@@ -109,6 +109,9 @@ operations:
 
 operationsMysql:
   fullnameOverride: operations-mysql
+  auth:
+    username: mifos
+    password: password
 
 zeebe:
     broker:
