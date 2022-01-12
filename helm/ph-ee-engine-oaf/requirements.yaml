@@ -15,6 +15,6 @@ dependencies:
   condition: "kibana.enabled"
 - name: mysql
   version: 1.6.2
-  repository: "https://charts.helm.sh/stable"
+  repository: "https://charts.bitnami.com/bitnami"
   condition: "mysql.enabled"
 
