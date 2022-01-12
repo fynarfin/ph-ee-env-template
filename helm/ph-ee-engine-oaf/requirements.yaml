@@ -14,7 +14,7 @@ dependencies:
   version: 7.13.2
   condition: "kibana.enabled"
 - name: mysql
-  version: 8.0.27
+  version: 8.8.20
   repository: "https://charts.bitnami.com/bitnami"
   condition: "operations.enabled"
 
