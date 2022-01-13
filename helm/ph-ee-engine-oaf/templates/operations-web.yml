@@ -18,6 +18,14 @@ spec:
       labels:
         app: ph-ee-operations-web
     spec:
+      intContainers:
+        - name: wait-db
+          image: jwilder/dockerize
+          imagePullPolicy: IfNotPresent
+          args:
+          - -timeout=120s
+          - -wait
+          - tcp://operations-mysql:3306
       containers:
         - name: ph-ee-operations-web
           image: "{{ .Values.operations_web.image }}"

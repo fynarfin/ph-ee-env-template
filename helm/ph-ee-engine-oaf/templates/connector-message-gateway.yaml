@@ -16,6 +16,14 @@ spec:
       labels:
         app: message-gateway
     spec:
+      intContainers:
+        - name: wait-db
+          image: jwilder/dockerize
+          imagePullPolicy: IfNotPresent
+          args:
+          - -timeout=120s
+          - -wait
+          - tcp://operations-mysql:3306
       containers:
         - name: message-gateway
           image: "{{ .Values.messagegateway.image }}"
