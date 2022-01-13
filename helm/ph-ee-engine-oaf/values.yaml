@@ -119,9 +119,9 @@ mysql:
       #!/bin/sh
       if [[ $(hostname) == *mysql-0* ]]; then
         echo "Master node"
-        mysql -P 3306 -u root -p{{ .Values.mysql.auth.rootPassword }} -e "create database messagegateway";
-        mysql -P 3306 -u root -p{{ .Values.mysql.auth.rootPassword }} -e "GRANT ALL PRIVILEGES ON *.* TO 'mifos'@'%' WITH GRANT OPTION";
-        mysql -P 3306 -u root -p{{ .Values.mysql.auth.rootPassword }} -e "FLUSH PRIVILEGES";
+        mysql -P 3306 -u root -p${MYSQL_ROOT_PASSWORD} -e "create database messagegateway";
+        mysql -P 3306 -u root -p${MYSQL_ROOT_PASSWORD} -e "GRANT ALL PRIVILEGES ON *.* TO 'mifos'@'%' WITH GRANT OPTION";
+        mysql -P 3306 -u root -p${MYSQL_ROOT_PASSWORD} -e "FLUSH PRIVILEGES";
       else
         echo "No master node"
       fi
