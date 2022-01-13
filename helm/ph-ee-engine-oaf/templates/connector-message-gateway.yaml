@@ -16,7 +16,7 @@ spec:
       labels:
         app: message-gateway
     spec:
-      intContainers:
+      initContainers:
         - name: wait-db
           image: jwilder/dockerize
           imagePullPolicy: IfNotPresent

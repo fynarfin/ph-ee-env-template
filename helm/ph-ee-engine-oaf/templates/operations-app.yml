@@ -17,7 +17,7 @@ spec:
       labels:
         app: ph-ee-operations-app
     spec:
-      intContainers:
+      initContainers:
         - name: wait-db
           image: jwilder/dockerize
           imagePullPolicy: IfNotPresent
