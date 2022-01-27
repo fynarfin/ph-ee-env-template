@@ -20,6 +20,18 @@ spec:
           ports:
             - containerPort: 9191
           imagePullPolicy: Always
+            livenessProbe:
+              httpGet:
+                path: /actuator/health/liveness
+                port: 9191
+              initialDelaySeconds: 120
+              periodSeconds: 30
+            readinessProbe:
+              httpGet:
+                path: /actuator/health/readiness
+                port: 9191
+              initialDelaySeconds: 120
+              periodSeconds: 30
           env:
             - name: spring.datasource.url
               value: jdbc:mysql:thin://operations-mysql:3306/messagegateway
@@ -27,6 +39,10 @@ spec:
               value: "mifos"
             - name: spring.datasource.password
               value: "password"
+            - name: "CALLBACKCONFIG_HOST"
+              value: "{{ .Values.messagegateway.CALLBACKCONFIG_HOST }}"
+            - name: "HOSTCONFIG_HOST"
+              value: "{{ .Values.messagegateway.HOSTCONFIG_HOST }}"
           volumeMounts:
             - name: ph-ee-config
               mountPath: "/config"

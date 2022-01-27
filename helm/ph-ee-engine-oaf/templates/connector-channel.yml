@@ -23,9 +23,23 @@ spec:
           resources:
             limits:
               memory: "768M"
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: 8080
+            initialDelaySeconds: 20
+            periodSeconds: 30
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: 8080
+            initialDelaySeconds: 20
+            periodSeconds: 30
           env:
             - name: "SPRING_PROFILES_ACTIVE"
               value: "{{ .Values.channel.SPRING_PROFILES_ACTIVE }}"
+            - name: "DFSPIDS"
+              value: "{{ .Values.channel.DFSPIDS }}"
           volumeMounts:
             - name: ph-ee-config
               mountPath: "/config"
