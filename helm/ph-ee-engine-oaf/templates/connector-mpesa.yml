@@ -1,3 +1,5 @@
+{{- if .Values.mpesa.enabled -}}
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -20,6 +22,18 @@ spec:
           ports:
             - containerPort: 5000
           imagePullPolicy: Always
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: 8080
+            initialDelaySeconds: 20
+            periodSeconds: 30
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: 8080
+            initialDelaySeconds: 20
+            periodSeconds: 30
           resources:
             limits:
               memory: "512M"
@@ -30,6 +44,21 @@ spec:
               value: "zeebe-zeebe-gateway:26500"
             - name: "MPESA_LOCAL_HOST"
               value: "https://mpesa.ibank.financial"
+            - name: "MPESA_AUTH_CLIENT-KEY"
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ .Values.mpesa.secret.name }}"
+                  key: "{{ .Values.mpesa.secret.key.auth_client_key }}"
+            - name: "MPESA_AUTH_CLIENT-SECRET"
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ .Values.mpesa.secret.name }}"
+                  key: "{{ .Values.mpesa.secret.key.auth_client_secret }}"
+            - name: "MPESA_API_PASS-KEY"
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ .Values.mpesa.secret.name }}"
+                  key: "{{ .Values.mpesa.secret.key.api_pass_key }}"
 
 ---
 apiVersion: v1
@@ -48,3 +77,14 @@ spec:
     app: ph-ee-connector-mpesa
   sessionAffinity: None
   type: ClusterIP
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mpesa-secret
+type: Opaque
+data:
+  client-key: cmVwbGFjZSB0aGlzIHdpdGggY2xpZW50IGtleQo=
+  client-secret: cmVwbGFjZSB0aGlzIHdpdGggY2xpZW50IHNlY3JldAo=
+  pass-key: cmVwbGFjZSB0aGlzIHdpdGggcGFzcyBrZXkK
+

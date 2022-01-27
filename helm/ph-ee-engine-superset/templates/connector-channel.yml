@@ -18,9 +18,22 @@ spec:
     spec:
       containers:
         - name: ph-ee-connector-channel
-          image: "{{ .Values.channel.image }}"
+          image: "{{ .Values.channel.image }}" 
           ports:
             - containerPort: 5000
+          imagePullPolicy: Always
+            livenessProbe:
+              httpGet:
+                path: /actuator/health/liveness
+                port: 8080
+              initialDelaySeconds: 20
+              periodSeconds: 30
+            readinessProbe:
+              httpGet:
+                path: /actuator/health/readiness
+                port: 8080
+              initialDelaySeconds: 20
+              periodSeconds: 30
           env:
             - name: "SPRING_PROFILES_ACTIVE"
               value: "{{ .Values.channel.SPRING_PROFILES_ACTIVE }}"
@@ -36,7 +49,7 @@ spec:
             name: ph-ee-config
 
 ---
-apiVersion: networking.k8s.io/v1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: ph-ee-connector-channel

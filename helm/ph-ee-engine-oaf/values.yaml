@@ -130,6 +130,7 @@ zeebe:
       contactpoint: "zeebe-zeebe-gateway:26500"
 
 channel:
+  DFSPIDS: ""
   SPRING_PROFILES_ACTIVE: "med"
   hostname: "paymenthub.qa.oneacrfund.org"
   image: "oaftech.azurecr.io/phee-ns/ph-ee-connector-channel"
@@ -145,16 +146,21 @@ operations_web:
   image: "oaftech.azurecr.io/phee-ns/ph-ee-operations-web"
 
 identity:
-    hostname: "paymenthub.qa.oneacrfund.org"
+    hostname: "paymenthub.qa.oneacrefund.org"
     image: ""
+    ingress:
+      enabled: true
+      annotations: {}
 
 mpesa:
+  enabled: true
   SPRING_PROFILES_ACTIVE: "med"
   image: "oaftech.azurecr.io/phee-ns/ph-ee-connector-mpesa"
   hostname: "paymenthub.qa.oneacrfund.org"
 
 # pesa core connector
 roster_connector: 
+  enabled: true
   SPRING_PROFILES_ACTIVE: "med"
   image: "oaftech.azurecr.io/phee-ns/ph-ee-connector-ams-pesa"
 
@@ -164,8 +170,12 @@ notifications:
   hostname: "paymenthub.qa.oneacrfund.org"
 
 zeebe_ops:
+  enabled: true
   SPRING_PROFILES_ACTIVE: ""
-  hostname: "paymenthub.qa.oneacrfund.org"
+  hostname: "paymenthub.qa.oneacrefund.org"
+  ingress:
+    enabled: true
+    annotations: {}
 
 messagegateway:
   image: "oaftech.azurecr.io/phee-ns/message-gateway"

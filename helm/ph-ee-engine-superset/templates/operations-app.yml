@@ -39,6 +39,8 @@ spec:
               value: "password"
             - name: "SPRING_PROFILES_ACTIVE"
               value: "{{ .Values.operations_app.SPRING_PROFILES_ACTIVE }}"
+            - name: "TENANTS"
+              value: "{{ .Values.operations_app.TENANTS }}"
           volumeMounts:
             - name: ph-ee-config
               mountPath: "/config"
@@ -66,7 +68,7 @@ spec:
   type: ClusterIP
 
 ---
-apiVersion: networking.k8s.io/v1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: ph-ee-operations-app
@@ -82,7 +84,7 @@ spec:
               servicePort: 80
 
 ---
-apiVersion: networking.k8s.io/v1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: ph-ee-identity
