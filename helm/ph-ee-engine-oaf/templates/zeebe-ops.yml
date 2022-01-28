@@ -13,8 +13,6 @@ spec:
     metadata:
       labels:
         app: ph-ee-zeebe-ops
-      annotations:
-        deployTime: "{{ .Values.deployTime }}"
     spec:
       containers:
         - name: ph-ee-zeebe-ops
@@ -46,4 +44,3 @@ spec:
     app: ph-ee-zeebe-ops
   sessionAffinity: None
   type: ClusterIP
-  

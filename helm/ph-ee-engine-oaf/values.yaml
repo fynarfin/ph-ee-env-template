@@ -177,6 +177,7 @@ notifications:
 zeebe_ops:
   enabled: true
   SPRING_PROFILES_ACTIVE: ""
+  image: "oaftech.azurecr.io/phee-ns/phee-zeebe-ops"
   hostname: "paymenthub.qa.oneacrefund.org"
   ingress:
     enabled: true
