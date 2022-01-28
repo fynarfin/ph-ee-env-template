@@ -115,7 +115,7 @@ mysql:
     rootPassword: root
   initdbScripts:
     my_init_script.sh: |
-      #!/bin/sh
+      #!/bin/bash
       if [[ $(hostname) == *mysql-0* ]]; then
         mysql -P 3306 -u root -p${MYSQL_ROOT_PASSWORD} -e "CREATE DATABASE IF NOT EXISTS tenants";
         mysql -P 3306 -u root -p${MYSQL_ROOT_PASSWORD} -e "CREATE DATABASE IF NOT EXISTS messagegateway";
