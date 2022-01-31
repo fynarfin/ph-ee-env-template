@@ -143,7 +143,7 @@ operations_app:
 operations_web:
   hostname: "paymenthub.qa.oneacrfund.org"
   webhost: "paymenthub.qa.oneacrfund.org"
-  image: "oaftech.azurecr.io/phee-ns/ph-ee-operations-web"
+  image: "oaftech.azurecr.io/phee-ns/ops-web"
 
 identity:
     hostname: "paymenthub.qa.oneacrefund.org"
