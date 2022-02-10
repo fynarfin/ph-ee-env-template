@@ -109,6 +109,7 @@ operations:
 
 mysql:
   fullnameOverride: operations-mysql
+  mysqlDatabase: "tenants"
   auth:
     username: mifos
     password: password
@@ -117,6 +118,8 @@ mysql:
     my_init_script.sh: |
       #!/bin/bash
       if [[ $(hostname) == *mysql-0* ]]; then
+        mysql -P 3306 -u root -p${MYSQL_ROOT_PASSWORD} -e "CREATE DATABASE IF NOT EXISTS oaf";
+        mysql -P 3306 -u root -p${MYSQL_ROOT_PASSWORD} -e "CREATE DATABASE IF NOT EXISTS messagegateway";
         mysql -P 3306 -u root -p${MYSQL_ROOT_PASSWORD} -e "GRANT ALL PRIVILEGES ON *.* TO 'mifos'@'%' WITH GRANT OPTION";
         mysql -P 3306 -u root -p${MYSQL_ROOT_PASSWORD} -e "FLUSH PRIVILEGES";
       else
