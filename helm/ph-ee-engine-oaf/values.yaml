@@ -113,7 +113,7 @@ mysql:
     username: mifos
     password: password
     rootPassword: root
-    database: "tenants"
+    database: tenants
   initdbScripts:
     my_init_script.sh: |
       #!/bin/bash
