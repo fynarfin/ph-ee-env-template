@@ -107,18 +107,24 @@ kibana:
 operations:
   enabled: true
 
-  operationsMysql:
-    mysqlRootPassword: "ethieTieCh8ahv"
-    mysqlUser: "mifos"
-    mysqlPassword: "password"
-    mysqlDatabase: "tenants"
-    initializationFiles:
-      setup.sql: |-
-        CREATE DATABASE oaf;
-        CREATE DATABASE messagegateway;
-        GRANT ALL ON *.* TO 'root'@'%';
-        GRANT ALL PRIVILEGES ON messagegateway.* TO 'mifos';
-        GRANT ALL PRIVILEGES ON oaf.* TO 'mifos';
+mysql:
+  fullnameOverride: operations-mysql
+  mysqlDatabase: "tenants"
+  auth:
+    username: mifos
+    password: password
+    rootPassword: root
+  initdbScripts:
+    my_init_script.sh: |
+      #!/bin/bash
+      if [[ $(hostname) == *mysql-0* ]]; then
+        mysql -P 3306 -u root -p${MYSQL_ROOT_PASSWORD} -e "CREATE DATABASE IF NOT EXISTS oaf";
+        mysql -P 3306 -u root -p${MYSQL_ROOT_PASSWORD} -e "CREATE DATABASE IF NOT EXISTS messagegateway";
+        mysql -P 3306 -u root -p${MYSQL_ROOT_PASSWORD} -e "GRANT ALL PRIVILEGES ON *.* TO 'mifos'@'%' WITH GRANT OPTION";
+        mysql -P 3306 -u root -p${MYSQL_ROOT_PASSWORD} -e "FLUSH PRIVILEGES";
+      else
+        echo "No master node"
+      fi
 
 zeebe:
     broker:
