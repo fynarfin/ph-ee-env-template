@@ -109,11 +109,11 @@ operations:
 
 mysql:
   fullnameOverride: operations-mysql
-  mysqlDatabase: "tenants"
   auth:
     username: mifos
     password: password
     rootPassword: root
+    database: "tenants"
   initdbScripts:
     my_init_script.sh: |
       #!/bin/bash
