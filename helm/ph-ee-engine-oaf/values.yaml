@@ -163,12 +163,20 @@ mpesa:
     clientKey: "replace this with client key"
     clientSecret: "replace this with client secret"
     passKey: "replace this with pass key"
+  safaricom:
+    auth_host: https://api.safaricom.co.ke/oauth/v1/generate
+   
 
 # pesa core connector
 roster_connector: 
   enabled: true
   SPRING_PROFILES_ACTIVE: "med"
   image: "oaftech.azurecr.io/phee-ns/ph-ee-connector-ams-pesa"
+  ams: 
+    local:
+      enabled: true
+  pesacore:
+    auth_header: PaymentHubTest
 
 notifications:
   SPRING_PROFILES_ACTIVE: "med"
