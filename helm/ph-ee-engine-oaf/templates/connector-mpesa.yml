@@ -43,7 +43,17 @@ spec:
             - name: "ZEEBE_BROKER_CONTACTPOINT"
               value: "zeebe-zeebe-gateway:26500"
             - name: "MPESA_LOCAL_HOST"
-              value: "https://mpesa.ibank.financial"
+              value: "{{ .Values.mpesa.callback_host }}"
+            - name: "MPESA_BUSINESS-SHORT-CODE"
+              value: "{{ .Values.mpesa.business_short_code }}"
+            - name: "MPESA_TILL"
+              value: "{{ .Values.mpesa.till_number }}"
+            - name: "MPESA_AUTH_HOST"
+              value: "{{ .Values.mpesa.safaricom.auth_host }}"
+            - name: "MPESA_MAX-RETRY-COUNT"
+              value: "{{ .Values.mpesa.retry_count }}"
+            - name: "MPESA_API_HOST"
+              value: "{{ .Values.mpesa.safaricom.api_host }}"
             - name: "MPESA_AUTH_CLIENT-KEY"
               valueFrom:
                 secretKeyRef:

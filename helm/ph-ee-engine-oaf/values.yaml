@@ -113,25 +113,26 @@ mysql:
     username: mifos
     password: password
     rootPassword: root
-  initdbScripts:
-    my_init_script.sh: |
-      #!/bin/bash
-      if [[ $(hostname) == *mysql-0* ]]; then
-        mysql -P 3306 -u root -p${MYSQL_ROOT_PASSWORD} -e "CREATE DATABASE IF NOT EXISTS tenants";
-        mysql -P 3306 -u root -p${MYSQL_ROOT_PASSWORD} -e "CREATE DATABASE IF NOT EXISTS messagegateway";
-        mysql -P 3306 -u root -p${MYSQL_ROOT_PASSWORD} -e "GRANT ALL PRIVILEGES ON *.* TO 'mifos'@'%' WITH GRANT OPTION";
-        mysql -P 3306 -u root -p${MYSQL_ROOT_PASSWORD} -e "FLUSH PRIVILEGES";
-      else
-        echo "No master node"
-      fi
+  # initdbScripts:
+  #   my_init_script.sh: |
+  #     #!/bin/bash
+  #     if [[ $(hostname) == *mysql-0* ]]; then
+  #       mysql -P 3306 -u root -p${MYSQL_ROOT_PASSWORD} -e "CREATE DATABASE IF NOT EXISTS tenants";
+  #       mysql -P 3306 -u root -p${MYSQL_ROOT_PASSWORD} -e "CREATE DATABASE IF NOT EXISTS messagegateway";
+  #       mysql -P 3306 -u root -p${MYSQL_ROOT_PASSWORD} -e "GRANT ALL PRIVILEGES ON *.* TO 'mifos'@'%' WITH GRANT OPTION";
+  #       mysql -P 3306 -u root -p${MYSQL_ROOT_PASSWORD} -e "FLUSH PRIVILEGES";
+  #     else
+  #       echo "No master node"
+  #     fi
 
 zeebe:
     broker:
       contactpoint: "zeebe-zeebe-gateway:26500"
 
 channel:
-  DFSPIDS: ""
-  SPRING_PROFILES_ACTIVE: "med"
+  DFSPIDS: "oaf"
+  transaction_id_length: 20
+  SPRING_PROFILES_ACTIVE: "bb"
   hostname: "paymenthub.qa.oneacrfund.org"
   image: "oaftech.azurecr.io/phee-ns/ph-ee-connector-channel"
 
