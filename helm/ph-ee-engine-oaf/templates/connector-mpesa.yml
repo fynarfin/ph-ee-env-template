@@ -54,6 +54,8 @@ spec:
               value: "{{ .Values.mpesa.retry_count }}"
             - name: "MPESA_API_HOST"
               value: "{{ .Values.mpesa.safaricom.api_host }}"
+            - name: "TENANT"
+              value: "{{ .Values.mpesa.tenant }}"
             - name: "MPESA_AUTH_CLIENT-KEY"
               valueFrom:
                 secretKeyRef:
@@ -94,7 +96,36 @@ metadata:
   name: mpesa-secret
 type: Opaque
 data:
-  client-key: {{ .Values.mpesa.secret.clientKey | b64enc }}
-  client-secret: {{ .Values.mpesa.secret.clientSecret | b64enc }}
-  pass-key: {{ .Values.mpesa.secret.passKey | b64enc }}
+  client-key: "MHBMeGJOODNGck9sNU5kMEZoOVppNUJRbE14U0wybjUK"
+  client-secret: "WXp1R05vSnhldWI4WkM2ZAo="
+  pass-key: "YmZiMjc5ZjlhYTliZGJjZjE1OGU5N2RkNzFhNDY3Y2QyZTBjODkzMDU5YjEwZjc4ZTZiNzJhZGExZWQyYzkxOQo="
+---
+{{- if .Values.mpesa.ingress.enabled }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ph-ee-connector-mpesa
+  annotations:
+{{- if .Values.mpesa.ingress.annotations }}
+{{ toYaml .Values.mpesa.ingress.annotations | indent 4 }}
+{{- end }}
+
+spec:
+  rules:
+    - host: "{{ .Values.mpesa.hostname }}"
+      http:
+        paths:
+          - path: /mpesa
+            pathType: Prefix
+            backend:
+              service:
+                name: ph-ee-connector-mpesa
+                port: 
+                  number: 80
+  tls:
+    - hosts:
+        - "{{ .Values.wildcardhostname }}"
+      secretName: "{{ .Values.tls }}"
+{{- end }}
+
 {{- end }}

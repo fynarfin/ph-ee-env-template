@@ -157,27 +157,28 @@ identity:
 mpesa:
   enabled: true
   SPRING_PROFILES_ACTIVE: "med"
-  image: "oaftech.azurecr.io/phee-ns/ph-ee-connector-mpesa"
-  hostname: "paymenthub.qa.oneacrfund.org"
-  secret:
-    name: mpesa-secret
-    clientKey: "replace this with client key"
-    clientSecret: "replace this with client secret"
-    passKey: "replace this with pass key"
+  image: ""
+  hostname: "paymenthub.qa.oneacrefund.org"
+  ingress:
+    enabled: true
+    annotations: {}
   safaricom:
-    auth_host: https://api.safaricom.co.ke/oauth/v1/generate
-   
+    auth_host: ""
+  secret:
+    name: ""
+    key:
+      auth_client_key: ""
 
 # pesa core connector
 roster_connector: 
   enabled: true
   SPRING_PROFILES_ACTIVE: "med"
-  image: "oaftech.azurecr.io/phee-ns/ph-ee-connector-ams-pesa"
-  ams: 
+  image: ""
+  ams:
     local:
-      enabled: true
+      enabled: ""
   pesacore:
-    auth_header: PaymentHubTest
+    auth_header: ""
 
 notifications:
   SPRING_PROFILES_ACTIVE: "med"
@@ -194,8 +195,16 @@ zeebe_ops:
     annotations: {}
 
 messagegateway:
-  image: "oaftech.azurecr.io/phee-ns/message-gateway"
-  hostname: "paymenthub.qa.oneacrfund.org"
+  enabled: true
+  image: ""
+  hostname: "paymenthub.qa.oneacrefund.org"
+  ingress:
+    enabled: true
+    annotations: {}
+  secret:
+    name: ""
+    key:
+      telerivet_api_key: ""
 
 importer_es:
   image: "oaftech.azurecr.io/phee-ns/ph-ee-importer-es"

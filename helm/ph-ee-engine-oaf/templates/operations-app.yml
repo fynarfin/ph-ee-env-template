@@ -77,4 +77,58 @@ spec:
   sessionAffinity: None
   type: ClusterIP
 
+---
+{{- if .Values.operations_app.ingress.enabled }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ph-ee-operations-app
+  annotations:
+{{- if .Values.operations_app.ingress.annotations }}
+{{ toYaml .Values.operations_app.ingress.annotations | indent 4 }}
+{{- end }}
+spec:
+  rules:
+    - host: "{{ .Values.operations_app.hostname }}"
+      http:
+        paths:
+          - path: /opsapp
+            pathType: Prefix
+            backend:
+              service:
+                name: ph-ee-operations-app
+                port: 
+                  number: 80
+  tls:
+    - hosts:
+        - "{{ .Values.wildcardhostname }}"
+      secretName: "{{ .Values.tls }}"
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ph-ee-identity
+  annotations:
+{{- if .Values.operations_app.ingress.annotations }}
+{{ toYaml .Values.operations_app.ingress.annotations | indent 4 }}
+{{- end }}
+spec:
+  rules:
+    - host: "{{ .Values.operations_app.hostname }}"
+      http:
+        paths:
+          - path: /identity
+            pathType: Prefix
+            backend:
+              service:
+                name: ph-ee-operations-app
+                port: 
+                  number: 80
+  tls:
+    - hosts:
+        - "{{ .Values.wildcardhostname }}"
+      secretName: "{{ .Values.tls }}"
+{{- end }}
+
 {{- end }}
