@@ -59,17 +59,17 @@ spec:
             - name: "MPESA_AUTH_CLIENT-KEY"
               valueFrom:
                 secretKeyRef:
-                  name: "{{ .Values.mpesa.secret.name }}"
+                  name: "mpesa-secret"
                   key: "client-key"
             - name: "MPESA_AUTH_CLIENT-SECRET"
               valueFrom:
                 secretKeyRef:
-                  name: "{{ .Values.mpesa.secret.name }}"
+                  name: "mpesa-secret"
                   key: "client-secret"
             - name: "MPESA_API_PASS-KEY"
               valueFrom:
                 secretKeyRef:
-                  name: "{{ .Values.mpesa.secret.name }}"
+                  name: "mpesa-secret"
                   key: "pass-key"
 
 ---
@@ -96,9 +96,9 @@ metadata:
   name: mpesa-secret
 type: Opaque
 data:
-  client-key: "MHBMeGJOODNGck9sNU5kMEZoOVppNUJRbE14U0wybjUK"
-  client-secret: "WXp1R05vSnhldWI4WkM2ZAo="
-  pass-key: "YmZiMjc5ZjlhYTliZGJjZjE1OGU5N2RkNzFhNDY3Y2QyZTBjODkzMDU5YjEwZjc4ZTZiNzJhZGExZWQyYzkxOQo="
+  client-key: {{ .Values.mpesa.secret.value.client_key | b64enc }}
+  client-secret: {{ .Values.mpesa.secret.value.client_secret | b64enc }}
+  pass-key: {{ .Values.mpesa.secret.value.pass_key | b64enc }}
 ---
 {{- if .Values.mpesa.ingress.enabled }}
 apiVersion: networking.k8s.io/v1

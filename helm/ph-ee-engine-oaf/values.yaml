@@ -92,7 +92,7 @@ zeebe-operate-helm:
 
 elasticsearch:
   enabled: false
-  imageTag: 7.13.2
+  imageTag: 7.16.3
   replicas: 1
   fullnameOverride: "ph-ee-elasticsearch"
   clusterName: "ph-ee-elasticsearch"
@@ -100,31 +100,29 @@ elasticsearch:
 
 kibana:
   enabled: false
-  imageTag: 7.13.2
+  imageTag: 7.16.3
   fullnameOverride: "ph-ee-kibana"
   elasticsearchHosts: "http://ph-ee-elasticsearch:9200/"
 
 operations:
   enabled: true
 
-mysql:
-  fullnameOverride: operations-mysql
+operationsmysql:
+  image:
+      tag: "5.7"
+      debug: false
   auth:
-    username: mifos
-    password: password
-    rootPassword: root
-    database: tenants
+    database: "tenants"
+    username: "mifos"
+    password: "password"
+    rootPassword: "4ET6ywqlGt"
   initdbScripts:
-    my_init_script.sh: |
-      #!/bin/bash
-      if [[ $(hostname) == *mysql-0* ]]; then
-        mysql -P 3306 -u root -p${MYSQL_ROOT_PASSWORD} -e "CREATE DATABASE IF NOT EXISTS oaf";
-        mysql -P 3306 -u root -p${MYSQL_ROOT_PASSWORD} -e "CREATE DATABASE IF NOT EXISTS messagegateway";
-        mysql -P 3306 -u root -p${MYSQL_ROOT_PASSWORD} -e "GRANT ALL PRIVILEGES ON *.* TO 'mifos'@'%' WITH GRANT OPTION";
-        mysql -P 3306 -u root -p${MYSQL_ROOT_PASSWORD} -e "FLUSH PRIVILEGES";
-      else
-        echo "No master node"
-      fi
+    setup.sql: |-
+      CREATE DATABASE IF NOT EXISTS oaf;
+      CREATE DATABASE IF NOT EXISTS messagegateway;
+      GRANT ALL ON *.* TO 'root'@'%';
+      GRANT ALL PRIVILEGES ON messagegateway.* TO 'mifos';
+      GRANT ALL PRIVILEGES ON oaf.* TO 'mifos';
 
 zeebe:
     broker:
@@ -139,8 +137,17 @@ channel:
 
 operations_app:
   SPRING_PROFILES_ACTIVE: "med"
-  hostname: "paymenthub.qa.oneacrfund.org"
-  image: "oaftech.azurecr.io/phee-ns/ph-ee-operations-app"
+  hostname: "paymenthub.qa.oneacrefund.org"
+  datasource:
+    username: "mifos"
+    password: "password"
+    host: "operations-mysql"
+    port: 3306
+    schema: "tenants"
+  image: ""
+  ingress:
+    enabled: true
+    annotations: {}
 
 operations_web:
   hostname: "paymenthub.qa.oneacrfund.org"

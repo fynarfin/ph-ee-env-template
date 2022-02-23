@@ -47,13 +47,17 @@ spec:
               port: 9191
             initialDelaySeconds: 120
             periodSeconds: 30
+
           env:
             - name: spring.datasource.url
-              value: jdbc:mysql:thin://operations-mysql:3306/messagegateway
-            - name: spring.datasource.username
-              value: "mifos"
-            - name: spring.datasource.password
-              value: "password"
+              value: "{{ .Values.messagegateway.DATASOURCE_URL }}"
+            - name: MYSQL_USERNAME
+              value: "{{ .Values.messagegateway.MYSQL_USERNAME }}"
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: "messagegateway-secret"
+                  key: "database-password"
             - name: "CALLBACKCONFIG_HOST"
               value: "{{ .Values.messagegateway.CALLBACKCONFIG_HOST }}"
             - name: "HOSTCONFIG_HOST"
@@ -65,16 +69,24 @@ spec:
             - name: "PROVIDERKEYS_TELERIVETAPIKEY"
               valueFrom:
                 secretKeyRef:
-                  name: "{{ .Values.messagegateway.secret.name }}"
-                  key: "{{ .Values.messagegateway.secret.key.telerivet_api_key }}"
+                  name: "messagegateway-secret"
+                  key: "api-key"
             - name: "PROVIDERKEYS_TELERIVETPROJECTID"
               valueFrom:
                 secretKeyRef:
-                  name: "{{ .Values.messagegateway.secret.name }}"
-                  key: "{{ .Values.messagegateway.secret.key.telerivet_project_id }}"
+                  name: "messagegateway-secret"
+                  key: "project-id"
           volumeMounts:
             - name: ph-ee-config
               mountPath: "/config"
+      initContainers:
+        - name: wait-db
+          image: jwilder/dockerize
+          imagePullPolicy: IfNotPresent
+          args:
+            - -timeout=120s
+            - -wait
+            - tcp://operations-mysql:3306
       volumes:
         - name: ph-ee-config
           configMap:
@@ -104,8 +116,9 @@ metadata:
   name: messagegateway-secret
 type: Opaque
 data:
-  api-key: "STUyR2Zfd21xV2p3T2o2ZzZBa1BYMFZYbFNCQzV2V2Z6cXJU"
-  project-id: "UEowYzYzOTZjOTdkYTQ5Nzc0"
+  api-key: "{{ .Values.messagegateway.secret.value.api_key | b64enc }}"
+  project-id: "{{ .Values.messagegateway.secret.value.project_id | b64enc }}"
+  database-password: {{ .Values.messagegateway.MYSQL_PASSWORD | b64enc }}
 ---
 {{- if .Values.messagegateway.ingress.enabled }}
 apiVersion: networking.k8s.io/v1
