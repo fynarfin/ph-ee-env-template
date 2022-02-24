@@ -49,7 +49,7 @@ spec:
             periodSeconds: 30
 
           env:
-            - name: spring.datasource.url
+            - name: SPRING_DATASOURCE_URL
               value: "{{ .Values.messagegateway.DATASOURCE_URL }}"
             - name: MYSQL_USERNAME
               value: "{{ .Values.messagegateway.MYSQL_USERNAME }}"
@@ -86,7 +86,7 @@ spec:
           args:
             - -timeout=120s
             - -wait
-            - tcp://operations-mysql:3306
+            - tcp://{{ .Values.operations_app.datasource.host }}:3306
       volumes:
         - name: ph-ee-config
           configMap:
