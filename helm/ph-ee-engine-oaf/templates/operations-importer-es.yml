@@ -15,6 +15,10 @@ spec:
     metadata:
       labels:
         app: ph-ee-importer-es
+      annotations:
+{{- if .Values.importer_es.deployment.annotations }}
+{{ toYaml .Values.importer_es.deployment.annotations | indent 8 }}
+{{- end }}
     spec:
       containers:
         - name: ph-ee-importer-es
