@@ -13,6 +13,10 @@ spec:
     metadata:
       labels:
         app: ph-ee-connector-channel
+      annotations:
+{{- if .Values.channel.deployment.annotations }}
+{{ toYaml .Values.channel.deployment.annotations | indent 8 }}
+{{- end }}
     spec:
       containers:
         - name: ph-ee-connector-channel

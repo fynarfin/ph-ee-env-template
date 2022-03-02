@@ -15,6 +15,10 @@ spec:
     metadata:
       labels:
         app: ph-ee-connector-mpesa
+      annotations:
+{{- if .Values.mpesa.deployment.annotations }}
+{{ toYaml .Values.mpesa.deployment.annotations | indent 8 }}
+{{- end }}
     spec:
       containers:
         - name: ph-ee-connector-mpesa

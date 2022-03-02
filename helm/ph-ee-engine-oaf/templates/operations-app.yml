@@ -16,15 +16,11 @@ spec:
     metadata:
       labels:
         app: ph-ee-operations-app
+      annotations:
+{{- if .Values.operations_app.deployment.annotations }}
+{{ toYaml .Values.operations_app.deployment.annotations | indent 8 }}
+{{- end }}
     spec:
-      initContainers:
-        - name: wait-db
-          image: jwilder/dockerize
-          imagePullPolicy: IfNotPresent
-          args:
-          - -timeout=120s
-          - -wait
-          - tcp://operations-mysql:3306
       containers:
         - name: ph-ee-operations-app
           image: "{{ .Values.operations_app.image }}"

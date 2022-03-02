@@ -129,11 +129,15 @@ zeebe:
       contactpoint: "zeebe-zeebe-gateway:26500"
 
 channel:
-  DFSPIDS: "oaf"
-  transaction_id_length: 20
-  SPRING_PROFILES_ACTIVE: "bb"
-  hostname: "paymenthub.qa.oneacrfund.org"
-  image: "oaftech.azurecr.io/phee-ns/ph-ee-connector-channel"
+  DFSPIDS: ""
+  SPRING_PROFILES_ACTIVE: "med"
+  hostname: "paymenthub.qa.oneacrefund.org"
+  image: ""
+  ingress:
+    enabled: true
+    annotations: {}
+  deployment:
+    annotations: {}
 
 operations_app:
   SPRING_PROFILES_ACTIVE: "med"
@@ -148,11 +152,19 @@ operations_app:
   ingress:
     enabled: true
     annotations: {}
+  deployment:
+    annotations: {}
 
 operations_web:
-  hostname: "paymenthub.qa.oneacrfund.org"
-  webhost: "paymenthub.qa.oneacrfund.org"
-  image: "oaftech.azurecr.io/phee-ns/ops-web"
+  hostname: "paymenthub.qa.oneacrefund.org"
+  path: "/"
+  webhost: "paymenthub.qa.oneacrefund.org"
+  image: ""
+  ingress:
+    enabled: true
+    annotations: {}
+  deployment:
+    annotations: {}
 
 identity:
     hostname: "paymenthub.qa.oneacrefund.org"
@@ -168,6 +180,8 @@ mpesa:
   hostname: "paymenthub.qa.oneacrefund.org"
   ingress:
     enabled: true
+    annotations: {}
+  deployment:
     annotations: {}
   safaricom:
     auth_host: ""
@@ -186,11 +200,18 @@ roster_connector:
       enabled: ""
   pesacore:
     auth_header: ""
+  deployment:
+    annotations: {}
 
 notifications:
   SPRING_PROFILES_ACTIVE: "med"
-  image: "oaftech.azurecr.io/phee-ns/ph-ee-notifications"
-  hostname: "paymenthub.qa.oneacrfund.org"
+  image: ""
+  hostname: "paymenthub.qa.oneacrefund.org"
+  ingress:
+    enabled: true
+    annotations: {}
+  deployment:
+    annotations: {}
 
 zeebe_ops:
   enabled: true
@@ -199,6 +220,8 @@ zeebe_ops:
   hostname: "paymenthub.qa.oneacrefund.org"
   ingress:
     enabled: true
+    annotations: {}
+  deployment:
     annotations: {}
 
 messagegateway:
@@ -212,6 +235,8 @@ messagegateway:
     name: ""
     key:
       telerivet_api_key: ""
+  deployment:
+    annotations: {}
 
 importer_es:
   image: "oaftech.azurecr.io/phee-ns/ph-ee-importer-es"
@@ -224,6 +249,8 @@ importer_rdbms:
       host: "operationsmysql"
       port: 3306
       schema: "tenants"
+  deployment:
+    annotations: {}
 
 wildcardhostname: ""
 

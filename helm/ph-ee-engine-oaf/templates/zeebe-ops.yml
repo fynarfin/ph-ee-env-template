@@ -13,6 +13,10 @@ spec:
     metadata:
       labels:
         app: ph-ee-zeebe-ops
+      annotations:
+{{- if .Values.zeebe_ops.deployment.annotations }}
+{{ toYaml .Values.zeebe_ops.deployment.annotations | indent 8 }}
+{{- end }}
     spec:
       containers:
         - name: ph-ee-zeebe-ops
