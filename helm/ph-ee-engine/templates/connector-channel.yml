@@ -80,10 +80,10 @@ spec:
         - path: /channel
           pathType: Prefix
           backend:
-            service:
-              name: ph-ee-connector-channel
-              port: 
-                number: 80
+{{- if .Values.channel.ingress.backend }}
+{{ toYaml .Values.channel.ingress.backend | indent 14 }}
+{{- end }} 
+
   tls:
     - hosts:
         - "{{ .Values.wildcardhostname }}"

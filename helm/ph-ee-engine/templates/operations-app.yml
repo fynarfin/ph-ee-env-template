@@ -116,10 +116,10 @@ spec:
           - path: /opsapp
             pathType: Prefix
             backend:
-              service:
-                name: ph-ee-operations-app
-                port: 
-                  number: 80
+{{- if .Values.operations_app.ingress.backend }}
+{{ toYaml .Values.operations_app.ingress.backend | indent 14 }}
+{{- end }}              
+
   tls:
     - hosts:
         - "{{ .Values.wildcardhostname }}"
@@ -142,10 +142,10 @@ spec:
           - path: /identity
             pathType: Prefix
             backend:
-              service:
-                name: ph-ee-operations-app
-                port: 
-                  number: 80
+{{- if .Values.operations_app.ingress.backend }}
+{{ toYaml .Values.operations_app.ingress.backend | indent 14 }}
+{{- end }} 
+
   tls:
     - hosts:
         - "{{ .Values.wildcardhostname }}"

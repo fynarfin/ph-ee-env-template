@@ -132,10 +132,10 @@ spec:
           - path: /messages
             pathType: Prefix
             backend:
-              service:
-                name: message-gateway
-                port: 
-                  number: 80
+{{- if .Values.messagegateway.ingress.backend }}
+{{ toYaml .Values.messagegateway.ingress.backend | indent 14 }}
+{{- end }} 
+
   tls:
     - hosts:
         - "{{ .Values.wildcardhostname }}"

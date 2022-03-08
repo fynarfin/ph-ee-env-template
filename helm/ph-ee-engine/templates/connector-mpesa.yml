@@ -124,10 +124,10 @@ spec:
           - path: /mpesa
             pathType: Prefix
             backend:
-              service:
-                name: ph-ee-connector-mpesa
-                port: 
-                  number: 80
+{{- if .Values.mpesa.ingress.backend }}
+{{ toYaml .Values.mpesa.ingress.backend | indent 14 }}
+{{- end }} 
+
   tls:
     - hosts:
         - "{{ .Values.wildcardhostname }}"

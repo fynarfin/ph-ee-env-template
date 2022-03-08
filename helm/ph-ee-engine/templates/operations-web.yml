@@ -78,10 +78,10 @@ spec:
           - path: "{{ .Values.operations_web.path }}"
             pathType: Prefix
             backend:
-              service:
-                name: ph-ee-operations-web
-                port: 
-                  number: 4200
+{{- if .Values.operations_web.ingress.backend }}
+{{ toYaml .Values.operations_web.ingress.backend | indent 14 }}
+{{- end }}
+
   tls:
     - hosts:
         - "{{ .Values.wildcardhostname }}"

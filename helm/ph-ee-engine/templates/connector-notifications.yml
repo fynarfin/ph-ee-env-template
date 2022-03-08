@@ -98,10 +98,10 @@ spec:
           - path: /notifications
             pathType: Prefix
             backend:
-              service:
-                name: ph-ee-connector-notifications
-                port: 
-                  number: 80
+{{- if .Values.notifications.ingress.backend }}
+{{ toYaml .Values.notifications.ingress.backend | indent 14 }}
+{{- end }} 
+
   tls:
     - hosts:
         - "{{ .Values.wildcardhostname }}"

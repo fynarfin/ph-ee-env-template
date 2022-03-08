@@ -109,6 +109,7 @@ channel:
   ingress:
     enabled: true
     annotations: {}
+    backend: {}
   deployment:
     annotations: {}
 
@@ -151,6 +152,20 @@ operations_app:
   ingress:
     enabled: true
     annotations: {}
+    backend: {}
+  deployment:
+    annotations: {}
+
+operations_web:
+  enabled: false
+  hostname: ""
+  path: "/"
+  webhost: ""
+  image: ""
+  ingress:
+    enabled: true
+    annotations: {}
+    backend: {}
   deployment:
     annotations: {}
 
@@ -162,6 +177,7 @@ mpesa:
   ingress:
     enabled: true
     annotations: {}
+    backend: {}
   deployment:
     annotations: {}
   safaricom:
@@ -190,6 +206,7 @@ messagegateway:
   ingress:
     enabled: true
     annotations: {}
+    backend: {}
   secret:
     name: ""
     key:
@@ -205,6 +222,7 @@ notifications:
   ingress:
     enabled: true
     annotations: {}
+    backend: {}
   deployment:
     annotations: {}
 
