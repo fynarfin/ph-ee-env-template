@@ -51,10 +51,10 @@ spec:
           - path: /zeebeops
             pathType: Prefix
             backend:
-              service:
-                name: ph-ee-zeebe-ops
-                port: 
-                  number: 80
+{{- if .Values.zeebe_ops.ingress.backend }}
+{{ toYaml .Values.zeebe_ops.ingress.backend | indent 14 }}
+{{- end }} 
+
   tls:
     - hosts:
         - "{{ .Values.wildcardhostname }}"

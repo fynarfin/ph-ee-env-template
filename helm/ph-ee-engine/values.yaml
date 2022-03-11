@@ -202,6 +202,9 @@ operations_web:
   deployment:
     annotations: {}
 
+identity:
+  hostname: ""
+
 mpesa:
   enabled: false
   replicas: 1
@@ -306,6 +309,7 @@ zeebe_ops:
   ingress:
     enabled: true
     annotations: {}
+    backend: {}
   deployment:
     annotations: {}
 
