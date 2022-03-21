@@ -1,11 +1,13 @@
-apiVersion: apps/v1
+{{- if .Values.ph_ee_connector_gsma.enabled -}}
+
+apiVersion: {{ .Values.deployment.apiversion }}
 kind: Deployment
 metadata:
   name: "ph-ee-connector-gsma"
   labels:
     app: ph-ee-connector-gsma
 spec:
-  replicas: 1
+  replicas: {{ .Values.ph_ee_connector_gsma.replicas }}
   selector:
     matchLabels:
       app: ph-ee-connector-gsma
@@ -14,11 +16,14 @@ spec:
       labels:
         app: ph-ee-connector-gsma
       annotations:
-        deployTime: "{{ .Values.deployTime }}"
+{{- if .Values.ph_ee_connector_gsma.deployment.annotations }}
+{{ toYaml .Values.ph_ee_connector_gsma.deployment.annotations | indent 8 }}
+{{- end }}
     spec:
       containers:
         - name: ph-ee-connector-gsma-mm
-          image: us.icr.io/phee-ns/ph-ee-gsma
+          image: "{{ .Values.ph_ee_connector_gsma.image }}"
+          imagePullPolicy: "{{ .Values.ph_ee_connector_gsma.imagePullPolicy }}"
           ports:
             - containerPort: 5000
           env:
@@ -33,7 +38,7 @@ spec:
             name: ph-ee-config
 
 ---
-apiVersion: v1
+apiVersion: {{ .Values.service.apiversion }}
 kind: Service
 metadata:
   labels:
@@ -50,3 +55,5 @@ spec:
     app: ph-ee-connector-gsma
   sessionAffinity: None
   type: ClusterIP
+
+{{- end }} 

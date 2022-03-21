@@ -1,11 +1,13 @@
-apiVersion: apps/v1
+{{- if .Values.mpesa.enabled -}}
+
+apiVersion: {{ .Values.deployment.apiversion }}
 kind: Deployment
 metadata:
   name: "ph-ee-connector-notifications"
   labels:
     app: ph-ee-connector-notifications
 spec:
-  replicas: 1
+  replicas: {{ .Values.notifications.replicas }}
   selector:
     matchLabels:
       app: ph-ee-connector-notifications
@@ -21,7 +23,7 @@ spec:
       containers:
         - name: ph-ee-connector-notifications
           image: "{{ .Values.notifications.image }}"
-          imagePullPolicy: Always
+          imagePullPolicy: "{{ .Values.notifications.imagePullPolicy }}"
           resources:
             limits:
               memory: "512M"
@@ -43,11 +45,11 @@ spec:
             - name: "SPRING_PROFILES_ACTIVE"
               value: "{{ .Values.notifications.SPRING_PROFILES_ACTIVE }}"
             - name: "ZEEBE_BROKER_CONTACTPOINT"
-              value: "zeebe-zeebe-gateway:26500"
+              value: "{{ .Values.notifications.zeebe_broker_contactpoint }}"
             - name: "HOSTCONFIG_HOST"
-              value: "message-gateway"
+              value: "{{ .Values.notifications.hostconfig.host }}"
             - name: "HOSTCONFIG_PORT"
-              value: "80"
+              value: "{{ .Values.notifications.hostconfig.port }}"
             - name: "MESSAGEGATEWAYCONFIG_HOST"
               value: "{{ .Values.notifications.MESSAGEGATEWAYCONFIG_HOST }}"
             - name: "NOTIFICATION_LOCAL_HOST"
@@ -60,7 +62,7 @@ spec:
               value:  "{{ .Values.notifications.LOGGING_LEVEL_ROOT }}"
 
 ---
-apiVersion: v1
+apiVersion: {{ .Values.service.apiversion }}
 kind: Service
 metadata:
   labels:
@@ -80,7 +82,7 @@ spec:
 
 ---
 {{- if .Values.notifications.ingress.enabled }}
-apiVersion: networking.k8s.io/v1
+apiVersion: {{ .Values.ingress.apiversion }}
 kind: Ingress
 metadata:
   name: ph-ee-notifications
@@ -96,12 +98,14 @@ spec:
           - path: /notifications
             pathType: Prefix
             backend:
-              service:
-                name: ph-ee-connector-notifications
-                port: 
-                  number: 80
+{{- if .Values.notifications.ingress.backend }}
+{{ toYaml .Values.notifications.ingress.backend | indent 14 }}
+{{- end }} 
+
   tls:
     - hosts:
         - "{{ .Values.wildcardhostname }}"
       secretName: "{{ .Values.tls }}"
+{{- end }}
+
 {{- end }}

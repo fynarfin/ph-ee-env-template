@@ -1,11 +1,13 @@
-apiVersion: apps/v1
+{{- if .Values.connector_bulk.enabled -}}
+
+apiVersion: {{ .Values.deployment.apiversion }}
 kind: Deployment
 metadata:
   name: "ph-ee-connector-bulk"
   labels:
     app: ph-ee-connector-bulk
 spec:
-  replicas: 1
+  replicas: {{ .Values.connector_bulk.replicas }}
   selector:
     matchLabels:
       app: ph-ee-connector-bulk
@@ -14,16 +16,19 @@ spec:
       labels:
         app: ph-ee-connector-bulk
       annotations:
-        deployTime: "{{ .Values.deployTime }}"
+{{- if .Values.connector_bulk.deployment.annotations }}
+{{ toYaml .Values.connector_bulk.deployment.annotations | indent 8 }}
+{{- end }}
     spec:
       containers:
         - name: ph-ee-connector-bulk
-          image: us.icr.io/phee-ns/ph-ee-connector-bulk
+          image: "{{ .Values.connector_bulk.image }}"
+          imagePullPolicy: "{{ .Values.connector_bulk.imagePullPolicy }}"
           ports:
             - containerPort: 5000
           env:
             - name: "SPRING_PROFILES_ACTIVE"
-              value: "{{ .Values.ph_ee_connector_gsma.SPRING_PROFILES_ACTIVE }}"
+              value: "{{ .Values.connector_bulk.SPRING_PROFILES_ACTIVE }}"
           volumeMounts:
             - name: ph-ee-config
               mountPath: "/config"
@@ -33,7 +38,7 @@ spec:
             name: ph-ee-config
 
 ---
-apiVersion: v1
+apiVersion: {{ .Values.service.apiversion }}
 kind: Service
 metadata:
   labels:
@@ -50,3 +55,5 @@ spec:
     app: ph-ee-connector-bulk
   sessionAffinity: None
   type: ClusterIP
+
+{{- end }}

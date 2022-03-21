@@ -1,11 +1,13 @@
-apiVersion: apps/v1
+{{- if .Values.channel.enabled -}}
+
+apiVersion: {{ .Values.deployment.apiversion }}
 kind: Deployment
 metadata:
   name: "ph-ee-connector-channel"
   labels:
     app: ph-ee-connector-channel
 spec:
-  replicas: 1
+  replicas: {{ .Values.channel.replicas }}
   selector:
     matchLabels:
       app: ph-ee-connector-channel
@@ -23,7 +25,7 @@ spec:
           image: "{{ .Values.channel.image }}"
           ports:
             - containerPort: 5000
-          imagePullPolicy: Always
+          imagePullPolicy: "{{ .Values.channel.imagePullPolicy }}"
           resources:
             limits:
               memory: "768M"
@@ -45,7 +47,7 @@ spec:
             - name: "DFSPIDS"
               value: "{{ .Values.channel.DFSPIDS }}"
             - name: "TRANSACTION-ID-LENGTH"
-              value: "{{ .Values.channel.transaction_id_length }}"
+              value: "{{ .Values.channel.TRANSACTION_ID_LENGTH }}"
             - name: "MPESA_NOTIFICATION_SUCCESS_ENABLED"
               value: "{{ .Values.notifications.NOTIFICATION_SUCCESS_ENABLED }}"
             - name: "MPESA_NOTIFICATION_FAILURE_ENABLED"
@@ -62,7 +64,7 @@ spec:
 
 ---
 {{- if .Values.channel.ingress.enabled }}
-apiVersion: networking.k8s.io/v1
+apiVersion: {{ .Values.ingress.apiversion }}
 kind: Ingress
 metadata:
   name: ph-ee-connector-channel
@@ -78,10 +80,10 @@ spec:
         - path: /channel
           pathType: Prefix
           backend:
-            service:
-              name: ph-ee-connector-channel
-              port: 
-                number: 80
+{{- if .Values.channel.ingress.backend }}
+{{ toYaml .Values.channel.ingress.backend | indent 14 }}
+{{- end }} 
+
   tls:
     - hosts:
         - "{{ .Values.wildcardhostname }}"
@@ -89,7 +91,7 @@ spec:
 {{- end }}
 
 ---
-apiVersion: v1
+apiVersion: {{ .Values.service.apiversion }}
 kind: Service
 metadata:
   labels:
@@ -105,3 +107,5 @@ spec:
     app: ph-ee-connector-channel
   sessionAffinity: None
   type: ClusterIP
+
+{{- end }}
