@@ -117,6 +117,7 @@ channel:
     cpu: "200m"
   ingress:
     enabled: true
+    path: "/channel"
     annotations: {}
     backend: {}
   deployment:
@@ -205,6 +206,7 @@ operations_app:
     cpu: "200m"
   ingress:
     enabled: true
+    path: "/opsapp"
     annotations: {}
     backend: {}
   deployment:
@@ -216,7 +218,6 @@ operations_web:
   image: ""
   imagePullPolicy: "Always"
   hostname: ""
-  path: "/"
   webhost: ""
   limits:
     memory: "512M"
@@ -226,6 +227,7 @@ operations_web:
     cpu: "200m"
   ingress:
     enabled: true
+    path: "/"
     annotations: {}
     backend: {}
   deployment:
@@ -259,6 +261,7 @@ mpesa:
     cpu: "200m"
   ingress:
     enabled: true
+    path: "/mpesa"
     annotations: {}
     backend: {}
   deployment:
@@ -313,6 +316,7 @@ messagegateway:
     cpu: "200m"
   ingress:
     enabled: true
+    path: "/messages"
     annotations: {}
     backend: {}
   secret:
@@ -346,6 +350,7 @@ notifications:
     cpu: "200m"
   ingress:
     enabled: true
+    path: "/notifications"
     annotations: {}
     backend: {}
   deployment:
@@ -369,6 +374,7 @@ zeebe_ops:
     cpu: "200m"
   ingress:
     enabled: true
+    path: "/zeebeops"
     annotations: {}
     backend: {}
   deployment:
