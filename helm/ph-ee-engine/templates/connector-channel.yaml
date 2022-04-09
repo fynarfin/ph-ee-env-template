@@ -28,7 +28,11 @@ spec:
           imagePullPolicy: "{{ .Values.channel.imagePullPolicy }}"
           resources:
             limits:
-              memory: "768M"
+              memory: "{{ .Values.channel.limits.memory }}"
+              cpu: "{{ .Values.channel.limits.cpu }}"
+            requests:
+              memory: "{{ .Values.channel.requests.memory }}"
+              cpu: "{{ .Values.channel.requests.cpu }}"
           livenessProbe:
             httpGet:
               path: /actuator/health/liveness
@@ -54,6 +58,8 @@ spec:
               value: "{{ .Values.notifications.NOTIFICATION_FAILURE_ENABLED }}"
             - name:  "LOGGING_LEVEL_ROOT"
               value: "{{ .Values.channel.LOGGING_LEVEL_ROOT }}"
+            - name: "AMS_GROUPS"
+              value: "{{ .Values.channel.AMS_GROUPS }}"
           volumeMounts:
             - name: ph-ee-config
               mountPath: "/config"
@@ -77,7 +83,7 @@ spec:
     - host: "{{ .Values.channel.hostname }}"
       http:
         paths:
-        - path: /channel
+        - path: "{{ .Values.channel.ingress.path }}"
           pathType: Prefix
           backend:
 {{- if .Values.channel.ingress.backend }}
