@@ -38,6 +38,8 @@ jobs:
       # Run chart-releaser to compile all charts and run sanity checks
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.2.0
+        with:
+          charts_dir: helm
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
 
