@@ -1,0 +1,78 @@
+name: Release Charts
+
+on:
+  push:
+    branches:
+      - master
+    # paths:
+    #   - "charts/**"
+
+jobs:
+  release:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.3.4
+        with:
+          fetch-depth: 0
+
+      - name: Configure Git
+        run: |
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+
+      - name: Install Helm
+        uses: azure/setup-helm@v1
+        with:
+          version: v3.4.0
+
+      - name: Add repo
+        run: helm repo add bitnami https://charts.bitnami.com/bitnami
+
+      # Install yq
+      - name: Install yq
+        uses: chrisdickinson/setup-yq@latest
+        with:
+          yq-version: v4.9.5
+
+      # Run chart-releaser to compile all charts and run sanity checks
+      - name: Run chart-releaser
+        uses: helm/chart-releaser-action@v1.2.0
+        env:
+          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+
+      - name: Push to ACR
+        env:
+          acrHost: oaftech.azurecr.io
+          acrUser: 3f405c02-dccd-45c9-8faf-1101cea12e9f
+          acrPassword: "${{ secrets.acrPassword }}"
+        run: |
+          export HELM_EXPERIMENTAL_OCI=1
+
+          # List local charts
+          helm chart list
+
+          # Login
+          echo $acrPassword | helm registry login $acrHost \
+            --username $acrUser \
+            --password-stdin
+
+          # Push all updated charts
+          cd ./helm/ph-ee-engine
+          NAME=$(yq eval ".name" ./Chart.yaml)
+          VERSION=$(yq eval ".version" ./Chart.yaml)
+
+          echo Checking chart $NAME:$VERSION
+          if [ -f ../.cr-release-packages/$NAME-$VERSION.tgz ]; then
+            echo Found latest release
+            helm chart save $d $acrHost/helm/$NAME:$VERSION
+            helm chart push $acrHost/helm/$NAME:$VERSION
+
+            helm chart save $d $acrHost/helm/$NAME:latest
+            helm chart push $acrHost/helm/$NAME:latest
+          else
+            echo No new release for chart $NAME:$VERSION
+          fi
+
+          # List local charts
+          helm chart list

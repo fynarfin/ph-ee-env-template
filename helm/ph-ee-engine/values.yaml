@@ -14,19 +14,20 @@ zeebe-cluster-helm:
   cpuThreadCount: "2"
   ioThreadCount: "2"
   pvcSize: "10Gi"
-  pvcAccessModes: [ "ReadWriteOnce" ]
+  pvcAccessModes:
+    - "ReadWriteOnce"
 
   resources:
     requests:
       cpu: 100m
 
   env:
-#    - name: ZEEBE_BROKER_BACKPRESSURE_ENABLED
-#      value: "false"
+    #    - name: ZEEBE_BROKER_BACKPRESSURE_ENABLED
+    #      value: "false"
     - name: ZEEBE_BROKER_EXECUTION_METRICS_EXPORTER_ENABLED
       value: "true"
-#    - name: ZEEBE_BROKER_EXPORTERS_ELASTICSEARCH_CLASSNAME
-#      value: "hu.dpc.rt.kafkastreamer.exporter.NoOpExporter"
+    #    - name: ZEEBE_BROKER_EXPORTERS_ELASTICSEARCH_CLASSNAME
+    #      value: "hu.dpc.rt.kafkastreamer.exporter.NoOpExporter"
     - name: ZEEBE_BROKER_EXPORTERS_ELASTICSEARCH_JARPATH
       value: "/exporters/ph-ee-kafka-exporter.jar"
     - name: ZEEBE_BROKER_EXPORTERS_KAFKA_JARPATH
@@ -144,8 +145,8 @@ configmap:
 operationsmysql:
   fullnameOverride: "operationsmysql"
   image:
-      tag: "5.7"
-      debug: false
+    tag: "5.7"
+    debug: false
   auth:
     database: ""
     username: ""
@@ -266,14 +267,12 @@ mpesa:
     backend: {}
   deployment:
     annotations: {}
-  safaricom:
-    auth_host: ""
   secret:
     name: ""
     key:
       auth_client_key: ""
 
-roster_connector: 
+roster_connector:
   enabled: false
   replicas: 1
   image: ""
@@ -415,11 +414,11 @@ importer_rdbms:
   imagePullPolicy: "Always"
   LOGGING_LEVEL_ROOT: "INFO"
   datasource:
-      username: ""
-      password: ""
-      host: ""
-      port: 3306
-      schema: ""
+    username: ""
+    password: ""
+    host: ""
+    port: 3306
+    schema: ""
   limits:
     memory: "512M"
     cpu: "500m"
@@ -476,4 +475,4 @@ ph_ee_connector_slcb:
 
 wildcardhostname: ""
 
-tls: "" 
+tls: ""
