@@ -6,5 +6,3 @@ helm/*.tgz
 **/*.lock
 
 .DS_Store
-index.yaml
-helm/index.yaml
