@@ -4,8 +4,8 @@ on:
   push:
     branches:
       - master
-    # paths:
-    #   - "charts/**"
+    paths:
+      - "helm/**"
 
 jobs:
   release:
@@ -67,10 +67,11 @@ jobs:
           echo Checking chart $NAME:$VERSION
           if [ -f ../.cr-release-packages/$NAME-$VERSION.tgz ]; then
             echo Found latest release
-            helm chart save $d $acrHost/helm/$NAME:$VERSION
+            echo "helm repository $acrHost/helm"
+            helm chart save $acrHost/helm/$NAME:$VERSION
             helm chart push $acrHost/helm/$NAME:$VERSION
 
-            helm chart save $d $acrHost/helm/$NAME:latest
+            helm chart save $acrHost/helm/$NAME:latest
             helm chart push $acrHost/helm/$NAME:latest
           else
             echo No new release for chart $NAME:$VERSION

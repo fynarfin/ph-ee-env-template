@@ -1,6 +1,6 @@
 # ph-ee-engine
 
-![Version: 1.0.5](https://img.shields.io/badge/Version-1.0.5-informational?style=flat-square)
+![Version: 1.0.7](https://img.shields.io/badge/Version-1.0.7-informational?style=flat-square)
 
 PaymentHub EE Engine
 
@@ -128,7 +128,7 @@ This chart will install Paymenthub
 | mpesa.deployment.annotations | object | `{}` |  |
 | mpesa.enabled | bool | `false` |  |
 | mpesa.hostname | string | `""` |  |
-| mpesa.image | string | `""` |  |
+| mpesa.image | string | `"oaftech.azurecr.io/phee-ns/ph-ee-connector-mpesa:v1.0.1"` |  |
 | mpesa.imagePullPolicy | string | `"Always"` |  |
 | mpesa.ingress.annotations | object | `{}` |  |
 | mpesa.ingress.backend | object | `{}` |  |
