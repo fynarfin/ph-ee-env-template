@@ -103,7 +103,7 @@ kibana:
 channel:
   enabled: false
   replicas: 1
-  image: ""
+  image: "oaftech.azurecr.io/phee-ns/ph-ee-connector-channel:e40b8b7834"
   imagePullPolicy: "Always"
   SPRING_PROFILES_ACTIVE: ""
   LOGGING_LEVEL_ROOT: "INFO"

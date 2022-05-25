@@ -1,6 +1,6 @@
 # ph-ee-engine
 
-![Version: 1.0.13](https://img.shields.io/badge/Version-1.0.13-informational?style=flat-square)
+![Version: 1.0.14](https://img.shields.io/badge/Version-1.0.14-informational?style=flat-square)
 
 PaymentHub EE Engine
 
@@ -35,7 +35,7 @@ This chart will install Paymenthub
 | channel.deployment.annotations | object | `{}` |  |
 | channel.enabled | bool | `false` |  |
 | channel.hostname | string | `""` |  |
-| channel.image | string | `""` |  |
+| channel.image | string | `"oaftech.azurecr.io/phee-ns/ph-ee-connector-channel:e40b8b7834"` |  |
 | channel.imagePullPolicy | string | `"Always"` |  |
 | channel.ingress.annotations | object | `{}` |  |
 | channel.ingress.backend | object | `{}` |  |

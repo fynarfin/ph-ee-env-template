@@ -1,4 +1,4 @@
-charts/*.tgz
+*.tgz
 .idea/
 
 *.iml
