@@ -1,5 +1,8 @@
 chart-repos:
   - bitnami=https://charts.bitnami.com/bitnami
+  - elastic=http://helm.elastic.co
+  - camunda=https://helm.camunda.io
+
 helm-extra-args: --timeout 15m
 debug: true
 target-branch: master
