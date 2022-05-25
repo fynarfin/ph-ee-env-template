@@ -296,7 +296,7 @@ roster_connector:
 messagegateway:
   enabled: false
   replicas: 1
-  image: ""
+  image: "oaftech.azurecr.io/phee-ns/message-gateway:34d94ccc09"
   imagePullPolicy: "Always"
   LOGGING_LEVEL_ROOT: "INFO"
   hostname: ""
