@@ -1,6 +1,6 @@
 # ph-ee-engine
 
-![Version: 1.0.7](https://img.shields.io/badge/Version-1.0.7-informational?style=flat-square)
+![Version: 1.0.8](https://img.shields.io/badge/Version-1.0.8-informational?style=flat-square)
 
 PaymentHub EE Engine
 
@@ -261,7 +261,7 @@ This chart will install Paymenthub
 | roster_connector.containerPort | int | `5000` |  |
 | roster_connector.deployment.annotations | object | `{}` |  |
 | roster_connector.enabled | bool | `false` |  |
-| roster_connector.image | string | `""` |  |
+| roster_connector.image | string | `"oaftech.azurecr.io/phee-ns/ph-ee-connector-ams-pesa:v1.0.0"` |  |
 | roster_connector.imagePullPolicy | string | `"Always"` |  |
 | roster_connector.limits.cpu | string | `"500m"` |  |
 | roster_connector.limits.memory | string | `"512M"` |  |
