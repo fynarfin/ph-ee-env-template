@@ -58,7 +58,7 @@ jobs:
             --password-stdin
 
           # Push all updated charts
-          cd ./helm/ph-ee-engine
+          cd ./charts/ph-ee-engine
           NAME=$(yq eval ".name" ./Chart.yaml)
           VERSION=$(yq eval ".version" ./Chart.yaml)
 
