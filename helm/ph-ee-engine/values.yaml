@@ -275,7 +275,7 @@ mpesa:
 roster_connector:
   enabled: false
   replicas: 1
-  image: ""
+  image: "oaftech.azurecr.io/phee-ns/ph-ee-connector-ams-pesa:v1.0.0"
   imagePullPolicy: "Always"
   SPRING_PROFILES_ACTIVE: ""
   containerPort: 5000
