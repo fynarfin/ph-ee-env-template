@@ -1,6 +1,6 @@
 # ph-ee-engine
 
-![Version: 1.0.10](https://img.shields.io/badge/Version-1.0.10-informational?style=flat-square)
+![Version: 1.0.11](https://img.shields.io/badge/Version-1.0.11-informational?style=flat-square)
 
 PaymentHub EE Engine
 
@@ -114,7 +114,7 @@ This chart will install Paymenthub
 | messagegateway.deployment.annotations | object | `{}` |  |
 | messagegateway.enabled | bool | `false` |  |
 | messagegateway.hostname | string | `""` |  |
-| messagegateway.image | string | `""` |  |
+| messagegateway.image | string | `"oaftech.azurecr.io/phee-ns/message-gateway:34d94ccc09"` |  |
 | messagegateway.imagePullPolicy | string | `"Always"` |  |
 | messagegateway.ingress.annotations | object | `{}` |  |
 | messagegateway.ingress.backend | object | `{}` |  |
