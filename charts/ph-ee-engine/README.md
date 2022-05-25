@@ -1,8 +1,14 @@
 # ph-ee-engine
 
-![Version: 1.0.9](https://img.shields.io/badge/Version-1.0.9-informational?style=flat-square)
+![Version: 1.0.10](https://img.shields.io/badge/Version-1.0.10-informational?style=flat-square)
 
 PaymentHub EE Engine
+
+## Maintainers
+
+| Name | Email | Url |
+| ---- | ------ | --- |
+| Innocent | <innocent.lou@oneacrefund.org> |  |
 
 ## TL;DR;
 
