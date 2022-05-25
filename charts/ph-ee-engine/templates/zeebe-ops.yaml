@@ -1,0 +1,90 @@
+{{- if .Values.zeebe_ops.enabled -}}
+
+apiVersion: {{ .Values.deployment.apiversion }}
+kind: Deployment
+metadata:
+  name: "ph-ee-zeebe-ops"
+  labels:
+    app: ph-ee-zeebe-ops
+spec:
+  replicas: {{ .Values.zeebe_ops.replicas }}
+  selector:
+    matchLabels:
+      app: ph-ee-zeebe-ops
+  template:
+    metadata:
+      labels:
+        app: ph-ee-zeebe-ops
+      annotations:
+{{- if .Values.zeebe_ops.deployment.annotations }}
+{{ toYaml .Values.zeebe_ops.deployment.annotations | indent 8 }}
+{{- end }}
+    spec:
+      containers:
+        - name: ph-ee-zeebe-ops
+          image: "{{ .Values.zeebe_ops.image }}"
+          imagePullPolicy: "{{ .Values.zeebe_ops.imagePullPolicy }}"
+          resources:
+            limits:
+              memory: "{{ .Values.zeebe_ops.limits.memory }}"
+              cpu: "{{ .Values.zeebe_ops.limits.cpu }}"
+            requests:
+              memory: "{{ .Values.zeebe_ops.requests.memory }}"
+              cpu: "{{ .Values.zeebe_ops.requests.cpu }}"
+          ports:
+            - containerPort: 5000
+          env:
+            - name: "ZEEBE_BROKER_CONTACTPOINT"
+              value: "{{ .Values.zeebe_ops.zeebe_broker_contactpoint }}"
+            - name: "TENANTS"
+              value: "{{ .Values.zeebe_ops.tenants }}"
+            - name: "LOGGING_LEVEL_ROOT"
+              value:  "{{ .Values.zeebe_ops.LOGGING_LEVEL_ROOT }}"
+---
+{{- if .Values.zeebe_ops.ingress.enabled }}
+apiVersion: {{ .Values.ingress.apiversion }}
+kind: Ingress
+metadata:
+  name: ph-ee-zeebe-ops
+  annotations:
+{{- if .Values.zeebe_ops.ingress.annotations }}
+{{ toYaml .Values.zeebe_ops.ingress.annotations | indent 4 }}
+{{- end }}
+
+spec:
+  rules:
+    - host: "{{ .Values.zeebe_ops.hostname }}"
+      http:
+        paths:
+          - path: "{{ .Values.zeebe_ops.ingress.path }}"
+            pathType: Prefix
+            backend:
+{{- if .Values.zeebe_ops.ingress.backend }}
+{{ toYaml .Values.zeebe_ops.ingress.backend | indent 14 }}
+{{- end }} 
+
+  tls:
+    - hosts:
+        - "{{ .Values.wildcardhostname }}"
+      secretName: "{{ .Values.tls }}"
+{{- end }}
+
+---
+apiVersion: {{ .Values.service.apiversion }}
+kind: Service
+metadata:
+  labels:
+    app: ph-ee-zeebe-ops
+  name: ph-ee-zeebe-ops
+spec:
+  ports:
+    - name: port
+      port: 80
+      protocol: TCP
+      targetPort: 5000
+  selector:
+    app: ph-ee-zeebe-ops
+  sessionAffinity: None
+  type: ClusterIP
+
+{{- end}}
