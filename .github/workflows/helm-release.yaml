@@ -81,6 +81,6 @@ jobs:
               echo No new release for chart $NAME:$VERSION
             fi
           done;
-          
+
           # List local charts
           helm chart list

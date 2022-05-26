@@ -1,6 +1,6 @@
 # ph-ee-engine
 
-![Version: 1.0.19](https://img.shields.io/badge/Version-1.0.19-informational?style=flat-square)
+![Version: 1.0.21](https://img.shields.io/badge/Version-1.0.21-informational?style=flat-square)
 
 PaymentHub EE Engine
 
@@ -61,7 +61,7 @@ This chart will install Paymenthub
 | elasticsearch.clusterName | string | `"ph-ee-elasticsearch"` |  |
 | elasticsearch.enabled | bool | `false` |  |
 | elasticsearch.fullnameOverride | string | `"ph-ee-elasticsearch"` |  |
-| elasticsearch.imageTag | string | `"7.13.2"` |  |
+| elasticsearch.imageTag | string | `"7.16.3"` |  |
 | elasticsearch.minimumMasterNodes | int | `1` |  |
 | elasticsearch.replicas | int | `1` |  |
 | identity.hostname | string | `""` |  |
@@ -102,7 +102,7 @@ This chart will install Paymenthub
 | kibana.elasticsearchHosts | string | `"http://ph-ee-elasticsearch:9200/"` |  |
 | kibana.enabled | bool | `false` |  |
 | kibana.fullnameOverride | string | `"ph-ee-kibana"` |  |
-| kibana.imageTag | string | `"7.13.2"` |  |
+| kibana.imageTag | string | `"7.16.3"` |  |
 | messagegateway.CALLBACKCONFIG_HOST | string | `"ph-ee-connector-notifications"` |  |
 | messagegateway.DATASOURCE_URL | string | `""` |  |
 | messagegateway.HOSTCONFIG_HOST | string | `""` |  |
