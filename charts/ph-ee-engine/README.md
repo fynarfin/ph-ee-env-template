@@ -1,6 +1,6 @@
 # ph-ee-engine
 
-![Version: 1.0.25](https://img.shields.io/badge/Version-1.0.25-informational?style=flat-square)
+![Version: 1.0.26](https://img.shields.io/badge/Version-1.0.26-informational?style=flat-square)
 
 PaymentHub EE Engine
 
