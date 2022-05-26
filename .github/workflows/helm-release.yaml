@@ -69,7 +69,8 @@ jobs:
           VERSION=$(yq eval ".version" ./Chart.yaml)
 
           echo Checking chart $NAME:$VERSION
-          ls ../.cr-release-packages
+          ls ..
+          ls .
           if [ -f ../.cr-release-packages/$NAME-$VERSION.tgz ]; then
             echo Found latest release
             echo "helm repository $acrHost/helm"
