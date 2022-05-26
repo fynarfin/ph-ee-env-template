@@ -357,7 +357,7 @@ zeebe_ops:
     enabled: false
   enabled: true
   replicas: 1
-  image: ""
+  image: "oaftech.azurecr.io/phee-ns/phee-zeebe-ops"
   imagePullPolicy: "Always"
   SPRING_PROFILES_ACTIVE: ""
   LOGGING_LEVEL_ROOT: "INFO"

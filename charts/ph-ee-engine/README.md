@@ -1,6 +1,6 @@
 # ph-ee-engine
 
-![Version: 1.0.24](https://img.shields.io/badge/Version-1.0.24-informational?style=flat-square)
+![Version: 1.0.25](https://img.shields.io/badge/Version-1.0.25-informational?style=flat-square)
 
 PaymentHub EE Engine
 
@@ -300,7 +300,7 @@ This chart will install Paymenthub
 | zeebe_ops.deployment.annotations | object | `{}` |  |
 | zeebe_ops.enabled | bool | `true` |  |
 | zeebe_ops.hostname | string | `""` |  |
-| zeebe_ops.image | string | `""` |  |
+| zeebe_ops.image | string | `"oaftech.azurecr.io/phee-ns/phee-zeebe-ops"` |  |
 | zeebe_ops.imagePullPolicy | string | `"Always"` |  |
 | zeebe_ops.ingress.enabled | bool | `false` |  |
 | zeebe_ops.limits.cpu | string | `"500m"` |  |
