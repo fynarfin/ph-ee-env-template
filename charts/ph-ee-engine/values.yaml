@@ -257,11 +257,14 @@ mpesa:
   deployment:
     annotations: {}
   secret:
-    name: ""
-    key:
-      auth_client_key: ""
+    value:
+      client_key: "secretKey"
+      client_secret: "secretClientSecret"
+      pass_key: "secretPassKey"
+      api_key: "secretApiKey"
 
 roster_connector:
+  LOGGING_LEVEL_ROOT: "INFO"
   ingress:
     enabled: false
   enabled: true
@@ -280,7 +283,8 @@ roster_connector:
     local:
       enabled: ""
   pesacore:
-    auth_header: ""
+    auth_header: "secretAuthHeader"
+    base_url: ""
   deployment:
     annotations: {}
 
@@ -310,9 +314,11 @@ messagegateway:
     annotations: {}
     backend: {}
   secret:
-    name: ""
-    key:
-      telerivet_api_key: ""
+    value:
+      api_key: ""
+      project_id: ""
+      key:
+        telerivet_api_key: ""
   deployment:
     annotations: {}
 

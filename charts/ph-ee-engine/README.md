@@ -1,6 +1,6 @@
 # ph-ee-engine
 
-![Version: 1.0.22](https://img.shields.io/badge/Version-1.0.22-informational?style=flat-square)
+![Version: 1.0.23](https://img.shields.io/badge/Version-1.0.23-informational?style=flat-square)
 
 PaymentHub EE Engine
 
@@ -116,8 +116,9 @@ This chart will install Paymenthub
 | messagegateway.requests.cpu | string | `"200m"` |  |
 | messagegateway.requests.memory | string | `"512M"` |  |
 | messagegateway.requests.path | string | `"/messages"` |  |
-| messagegateway.secret.key.telerivet_api_key | string | `""` |  |
-| messagegateway.secret.name | string | `""` |  |
+| messagegateway.secret.value.api_key | string | `""` |  |
+| messagegateway.secret.value.key.telerivet_api_key | string | `""` |  |
+| messagegateway.secret.value.project_id | string | `""` |  |
 | mpesa.LOGGING_LEVEL_ROOT | string | `"INFO"` |  |
 | mpesa.SPRING_PROFILES_ACTIVE | string | `""` |  |
 | mpesa.business_short_code | string | `""` |  |
@@ -139,8 +140,10 @@ This chart will install Paymenthub
 | mpesa.retry_count | int | `1` |  |
 | mpesa.safaricom.api_host | string | `""` |  |
 | mpesa.safaricom.auth_host | string | `""` |  |
-| mpesa.secret.key.auth_client_key | string | `""` |  |
-| mpesa.secret.name | string | `""` |  |
+| mpesa.secret.value.api_key | string | `"secretApiKey"` |  |
+| mpesa.secret.value.client_key | string | `"secretKey"` |  |
+| mpesa.secret.value.client_secret | string | `"secretClientSecret"` |  |
+| mpesa.secret.value.pass_key | string | `"secretPassKey"` |  |
 | mpesa.tenant | string | `""` |  |
 | mpesa.till_number | string | `""` |  |
 | mpesa.zeebe_broker_contactpoint | string | `""` |  |
@@ -225,6 +228,7 @@ This chart will install Paymenthub
 | ph_ee_connector_ams_mifos.replicas | int | `1` |  |
 | ph_ee_connector_ams_mifos.requests.cpu | string | `"200m"` |  |
 | ph_ee_connector_ams_mifos.requests.memory | string | `"512M"` |  |
+| roster_connector.LOGGING_LEVEL_ROOT | string | `"INFO"` |  |
 | roster_connector.SPRING_PROFILES_ACTIVE | string | `""` |  |
 | roster_connector.ams.local.enabled | string | `""` |  |
 | roster_connector.containerPort | int | `5000` |  |
@@ -235,7 +239,8 @@ This chart will install Paymenthub
 | roster_connector.ingress.enabled | bool | `false` |  |
 | roster_connector.limits.cpu | string | `"500m"` |  |
 | roster_connector.limits.memory | string | `"512M"` |  |
-| roster_connector.pesacore.auth_header | string | `""` |  |
+| roster_connector.pesacore.auth_header | string | `"secretAuthHeader"` |  |
+| roster_connector.pesacore.base_url | string | `""` |  |
 | roster_connector.replicas | int | `1` |  |
 | roster_connector.requests.cpu | string | `"200m"` |  |
 | roster_connector.requests.memory | string | `"512M"` |  |
