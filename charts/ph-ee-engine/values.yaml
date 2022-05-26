@@ -380,7 +380,7 @@ importer_es:
   ingress:
     enabled: false
   replicas: 1
-  image: ""
+  image: "oaftech.azurecr.io/phee-ns/ph-ee-importer-es"
   imagePullPolicy: "Always"
   limits:
     memory: "512M"
@@ -392,7 +392,7 @@ importer_es:
 kafka:
   enabled: true
   replicas: 1
-  image: ""
+  image: "spotify/kafka"
   imagePullPolicy: "Always"
   advertised:
     host: ""
@@ -409,7 +409,7 @@ kafka:
 importer_rdbms:
   enabled: true
   replicas: 1
-  image: ""
+  image: "oaftech.azurecr.io/phee-ns/ph-ee-importer-rdbms"
   imagePullPolicy: "Always"
   LOGGING_LEVEL_ROOT: "INFO"
   datasource:

@@ -1,6 +1,6 @@
 # ph-ee-engine
 
-![Version: 1.0.23](https://img.shields.io/badge/Version-1.0.23-informational?style=flat-square)
+![Version: 1.0.24](https://img.shields.io/badge/Version-1.0.24-informational?style=flat-square)
 
 PaymentHub EE Engine
 
@@ -55,7 +55,7 @@ This chart will install Paymenthub
 | elasticsearch.minimumMasterNodes | int | `1` |  |
 | elasticsearch.replicas | int | `1` |  |
 | identity.hostname | string | `""` |  |
-| importer_es.image | string | `""` |  |
+| importer_es.image | string | `"oaftech.azurecr.io/phee-ns/ph-ee-importer-es"` |  |
 | importer_es.imagePullPolicy | string | `"Always"` |  |
 | importer_es.ingress.enabled | bool | `false` |  |
 | importer_es.limits.cpu | string | `"500m"` |  |
@@ -71,7 +71,7 @@ This chart will install Paymenthub
 | importer_rdbms.datasource.username | string | `""` |  |
 | importer_rdbms.deployment.annotations | object | `{}` |  |
 | importer_rdbms.enabled | bool | `true` |  |
-| importer_rdbms.image | string | `""` |  |
+| importer_rdbms.image | string | `"oaftech.azurecr.io/phee-ns/ph-ee-importer-rdbms"` |  |
 | importer_rdbms.imagePullPolicy | string | `"Always"` |  |
 | importer_rdbms.limits.cpu | string | `"500m"` |  |
 | importer_rdbms.limits.memory | string | `"512M"` |  |
@@ -83,7 +83,7 @@ This chart will install Paymenthub
 | kafka.advertised.port | string | `""` |  |
 | kafka.deployment.annotations | object | `{}` |  |
 | kafka.enabled | bool | `true` |  |
-| kafka.image | string | `""` |  |
+| kafka.image | string | `"spotify/kafka"` |  |
 | kafka.imagePullPolicy | string | `"Always"` |  |
 | kafka.limits.cpu | string | `"500m"` |  |
 | kafka.limits.memory | string | `"512M"` |  |
