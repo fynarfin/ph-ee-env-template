@@ -64,23 +64,23 @@ jobs:
             --password-stdin
 
           # Push all updated charts
-          cd ./charts/ph-ee-engine
-          NAME=$(yq eval ".name" ./Chart.yaml)
-          VERSION=$(yq eval ".version" ./Chart.yaml)
+          cd ./charts/
+          for d in */ ; do
+            NAME=$(yq eval ".name" $d/Chart.yaml)
+            VERSION=$(yq eval ".version" $d/Chart.yaml)
 
-          echo Checking chart $NAME:$VERSION
+            echo Checking chart $NAME:$VERSION
+            if [ -f ../.cr-release-packages/$NAME-$VERSION.tgz ]; then
+              echo Found latest release
+              helm chart save $d $acrHost/helm/$NAME:$VERSION
+              helm chart push $acrHost/helm/$NAME:$VERSION
 
-          if [ -f ../../.cr-release-packages/$NAME-$VERSION.tgz ]; then
-            echo Found latest release
-            echo "helm repository $acrHost/helm"
-            helm chart save ph-ee-engine $acrHost/helm/$NAME:$VERSION
-            helm chart push $acrHost/helm/$NAME:$VERSION
-
-            helm chart save ph-ee-engine $acrHost/helm/$NAME:latest
-            helm chart push $acrHost/helm/$NAME:latest
-          else
-            echo No new release for chart $NAME:$VERSION
-          fi
-
+              helm chart save $d $acrHost/helm/$NAME:latest
+              helm chart push $acrHost/helm/$NAME:latest
+            else
+              echo No new release for chart $NAME:$VERSION
+            fi
+          done;
+          
           # List local charts
           helm chart list
