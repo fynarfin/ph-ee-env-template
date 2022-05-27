@@ -1,6 +1,6 @@
 # ph-ee-engine
 
-![Version: 1.0.26](https://img.shields.io/badge/Version-1.0.26-informational?style=flat-square)
+![Version: 1.1.0](https://img.shields.io/badge/Version-1.1.0-informational?style=flat-square)
 
 PaymentHub EE Engine
 
@@ -170,7 +170,7 @@ This chart will install Paymenthub
 | notifications.requests.memory | string | `"512M"` |  |
 | notifications.requests.path | string | `"/notifications"` |  |
 | notifications.zeebe_broker_contactpoint | string | `""` |  |
-| operations.enabled | bool | `false` |  |
+| operations.enabled | bool | `true` |  |
 | operations_app.LOGGING_LEVEL_ROOT | string | `"INFO"` |  |
 | operations_app.SPRING_PROFILES_ACTIVE | string | `""` |  |
 | operations_app.datasource.host | string | `""` |  |
@@ -213,6 +213,7 @@ This chart will install Paymenthub
 | operationsmysql.auth.password | string | `""` |  |
 | operationsmysql.auth.rootPassword | string | `""` |  |
 | operationsmysql.auth.username | string | `""` |  |
+| operationsmysql.enabled | bool | `false` |  |
 | operationsmysql.fullnameOverride | string | `"operationsmysql"` |  |
 | operationsmysql.image.debug | bool | `false` |  |
 | operationsmysql.image.tag | string | `"5.7"` |  |
