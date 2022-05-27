@@ -1,6 +1,6 @@
 # ph-ee-engine
 
-![Version: 1.1.0](https://img.shields.io/badge/Version-1.1.0-informational?style=flat-square)
+![Version: 1.1.1](https://img.shields.io/badge/Version-1.1.1-informational?style=flat-square)
 
 PaymentHub EE Engine
 
@@ -28,32 +28,25 @@ This chart will install Paymenthub
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| channel.DFSPIDS | string | `""` |  |
+| channel.AWS_ACCESS_KEY | string | `"xxx"` |  |
+| channel.AWS_SECRET_KEY | string | `"xxx"` |  |
+| channel.DFSPIDS | string | `"oaf"` |  |
 | channel.LOGGING_LEVEL_ROOT | string | `"INFO"` |  |
-| channel.SPRING_PROFILES_ACTIVE | string | `""` |  |
-| channel.TRANSACTION_ID_LENGTH | int | `20` |  |
-| channel.deployment.annotations | object | `{}` |  |
+| channel.SPRING_PROFILES_ACTIVE | string | `"bb"` |  |
+| channel.ams.groups | string | `""` |  |
+| channel.deployment.annotations."co.elastic.logs/enabled" | string | `"true"` |  |
+| channel.deployment.annotations.deployTime | string | `"{{ .Values.deployTime }}"` |  |
 | channel.enabled | bool | `true` |  |
-| channel.hostname | string | `""` |  |
-| channel.image | string | `"oaftech.azurecr.io/phee-ns/ph-ee-connector-channel:e40b8b7834"` |  |
-| channel.imagePullPolicy | string | `"Always"` |  |
+| channel.hostname | string | `"paymenthub.qa.oneacrefund.org"` |  |
+| channel.image | string | `"oaftech.azurecr.io/phee-ns/ph-ee-connector-channel"` |  |
+| channel.ingress.annotations."konghq.com/strip-path" | string | `"true"` |  |
+| channel.ingress.annotations."kubernetes.io/ingress.class" | string | `"kong"` |  |
+| channel.ingress.backend.service.name | string | `"ph-ee-connector-channel"` |  |
+| channel.ingress.backend.service.port.number | int | `80` |  |
 | channel.ingress.enabled | bool | `false` |  |
-| channel.limits.cpu | string | `"500m"` |  |
-| channel.limits.memory | string | `"768M"` |  |
-| channel.replicas | int | `1` |  |
-| channel.requests.annotations | object | `{}` |  |
-| channel.requests.backend | object | `{}` |  |
-| channel.requests.cpu | string | `"200m"` |  |
-| channel.requests.memory | string | `"768M"` |  |
-| channel.requests.path | string | `"/channel"` |  |
+| channel.transaction_id_length | int | `20` |  |
 | configmap.apiversion | string | `"v1"` |  |
 | deployment.apiversion | string | `"apps/v1"` |  |
-| elasticsearch.clusterName | string | `"ph-ee-elasticsearch"` |  |
-| elasticsearch.enabled | bool | `true` |  |
-| elasticsearch.fullnameOverride | string | `"ph-ee-elasticsearch"` |  |
-| elasticsearch.imageTag | string | `"7.16.3"` |  |
-| elasticsearch.minimumMasterNodes | int | `1` |  |
-| elasticsearch.replicas | int | `1` |  |
 | identity.hostname | string | `""` |  |
 | importer_es.image | string | `"oaftech.azurecr.io/phee-ns/ph-ee-importer-es"` |  |
 | importer_es.imagePullPolicy | string | `"Always"` |  |
@@ -90,10 +83,16 @@ This chart will install Paymenthub
 | kafka.replicas | int | `1` |  |
 | kafka.requests.cpu | string | `"200m"` |  |
 | kafka.requests.memory | string | `"512M"` |  |
-| kibana.elasticsearchHosts | string | `"http://ph-ee-elasticsearch:9200/"` |  |
 | kibana.enabled | bool | `true` |  |
-| kibana.fullnameOverride | string | `"ph-ee-kibana"` |  |
 | kibana.imageTag | string | `"7.16.3"` |  |
+| kibana.ingress.className | string | `"nginx"` |  |
+| kibana.ingress.enabled | bool | `false` |  |
+| kibana.ingress.hosts[0].host | string | `"ph-kibana.test.oneacrefund.org"` |  |
+| kibana.ingress.hosts[0].paths[0].path | string | `"/"` |  |
+| kibana.ingress.pathtype | string | `"ImplementationSpecific"` |  |
+| kibana.ingress.tls[0].hosts[0] | string | `"*.test.oneacrefund.org"` |  |
+| kibana.ingress.tls[0].secretName | string | `"oafqa-tls"` |  |
+| kibana.kibanaConfig."kibana.yml" | string | `"monitoring.enabled: false\n"` |  |
 | messagegateway.CALLBACKCONFIG_HOST | string | `"ph-ee-connector-notifications"` |  |
 | messagegateway.DATASOURCE_URL | string | `""` |  |
 | messagegateway.HOSTCONFIG_HOST | string | `""` |  |
@@ -209,15 +208,16 @@ This chart will install Paymenthub
 | operations_web.requests.memory | string | `"512M"` |  |
 | operations_web.requests.path | string | `"/"` |  |
 | operations_web.webhost | string | `""` |  |
-| operationsmysql.auth.database | string | `""` |  |
-| operationsmysql.auth.password | string | `""` |  |
-| operationsmysql.auth.rootPassword | string | `""` |  |
-| operationsmysql.auth.username | string | `""` |  |
+| operationsmysql.auth.database | string | `"tenants"` |  |
+| operationsmysql.auth.password | string | `"password"` |  |
+| operationsmysql.auth.rootPassword | string | `"4ET6ywqlGt"` |  |
+| operationsmysql.auth.username | string | `"mifos"` |  |
 | operationsmysql.enabled | bool | `false` |  |
 | operationsmysql.fullnameOverride | string | `"operationsmysql"` |  |
 | operationsmysql.image.debug | bool | `false` |  |
 | operationsmysql.image.tag | string | `"5.7"` |  |
 | operationsmysql.ingress.enabled | bool | `false` |  |
+| operationsmysql.initdbScripts."setup.sql" | string | `"CREATE DATABASE IF NOT EXISTS oaf;\nCREATE DATABASE IF NOT EXISTS messagegateway;\nGRANT ALL ON *.* TO 'root'@'%';\nGRANT ALL PRIVILEGES ON messagegateway.* TO 'mifos';\nGRANT ALL PRIVILEGES ON oaf.* TO 'mifos';"` |  |
 | ph_ee_connector_ams_mifos.SPRING_PROFILES_ACTIVE | string | `""` |  |
 | ph_ee_connector_ams_mifos.deployment.annotations | object | `{}` |  |
 | ph_ee_connector_ams_mifos.enabled | bool | `true` |  |
@@ -289,6 +289,25 @@ This chart will install Paymenthub
 | zeebe-cluster-helm.pvcSize | string | `"10Gi"` |  |
 | zeebe-cluster-helm.replicationFactor | string | `"1"` |  |
 | zeebe-cluster-helm.resources.requests.cpu | string | `"100m"` |  |
+| zeebe-operate-helm.elasticsearch.clusterHealthCheckParams | string | `"wait_for_status=yellow&timeout=100s"` |  |
+| zeebe-operate-helm.elasticsearch.data.readinessProbe.httpGet.path | string | `"/_cluster/health?wait_for_status=yellow&timeout=5s"` |  |
+| zeebe-operate-helm.elasticsearch.data.readinessProbe.httpGet.port | int | `9200` |  |
+| zeebe-operate-helm.elasticsearch.data.readinessProbe.initialDelaySeconds | int | `30` |  |
+| zeebe-operate-helm.elasticsearch.enabled | bool | `true` |  |
+| zeebe-operate-helm.elasticsearch.esJavaOpts | string | `"-Xmx512m -Xms512m"` |  |
+| zeebe-operate-helm.elasticsearch.imageTag | string | `"7.16.3"` |  |
+| zeebe-operate-helm.elasticsearch.master.readinessProbe.httpGet.path | string | `"/_cluster/health?wait_for_status=yellow&timeout=5s"` |  |
+| zeebe-operate-helm.elasticsearch.master.readinessProbe.httpGet.port | int | `9200` |  |
+| zeebe-operate-helm.elasticsearch.master.readinessProbe.initialDelaySeconds | int | `30` |  |
+| zeebe-operate-helm.elasticsearch.minimumMasterNodes | int | `1` |  |
+| zeebe-operate-helm.elasticsearch.replicas | int | `1` |  |
+| zeebe-operate-helm.elasticsearch.resources.limits.cpu | string | `"1000m"` |  |
+| zeebe-operate-helm.elasticsearch.resources.limits.memory | string | `"1024M"` |  |
+| zeebe-operate-helm.elasticsearch.resources.requests.cpu | string | `"200m"` |  |
+| zeebe-operate-helm.elasticsearch.resources.requests.memory | string | `"1024M"` |  |
+| zeebe-operate-helm.elasticsearch.volumeClaimTemplate.accessModes[0] | string | `"ReadWriteOnce"` |  |
+| zeebe-operate-helm.elasticsearch.volumeClaimTemplate.resources.requests.storage | string | `"10Gi"` |  |
+| zeebe-operate-helm.elasticsearch.volumeClaimTemplate.storageClassName | string | `"oaf-storage"` |  |
 | zeebe-operate-helm.enabled | bool | `false` |  |
 | zeebe-operate-helm.fullnameOverride | string | `"zeebe-operate"` |  |
 | zeebe-operate-helm.global.elasticsearch.clusterName | string | `"zeebe-elasticsearch"` |  |
