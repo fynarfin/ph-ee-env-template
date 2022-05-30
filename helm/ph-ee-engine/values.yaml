@@ -102,7 +102,8 @@ kibana:
 channel:
   enabled: false
   replicas: 1
-  image: ""
+  image:
+    tag: "1.0.0"
   imagePullPolicy: "Always"
   SPRING_PROFILES_ACTIVE: ""
   LOGGING_LEVEL_ROOT: "INFO"
@@ -155,7 +156,8 @@ operationsmysql:
 ph_ee_connector_ams_mifos:
   enabled: false
   replicas: 1
-  image: ""
+  image: "1.0.0"
+    tag:
   imagePullPolicy: "Always"
   SPRING_PROFILES_ACTIVE: ""
   limits:
@@ -170,7 +172,8 @@ ph_ee_connector_ams_mifos:
 ph_ee_connector_mojaloop:
   enabled: false
   replicas: 1
-  image: ""
+  image:
+    tag: "1.0.0"
   imagePullPolicy: "Always"
   SPRING_PROFILES_ACTIVE: ""
   limits:
@@ -185,7 +188,8 @@ ph_ee_connector_mojaloop:
 operations_app:
   enabled: false
   replicas: 1
-  image: ""
+  image:
+    tag: "1.0.0"
   imagePullPolicy: "Always"
   SPRING_PROFILES_ACTIVE: ""
   LOGGING_LEVEL_ROOT: "INFO"
@@ -215,7 +219,8 @@ operations_app:
 operations_web:
   enabled: false
   replicas: 1
-  image: ""
+  image:
+    tag: "1.1.0"
   imagePullPolicy: "Always"
   hostname: ""
   webhost: ""
@@ -239,7 +244,8 @@ identity:
 mpesa:
   enabled: false
   replicas: 1
-  image: ""
+  image:
+    tag: "1.1.2"
   imagePullPolicy: "Always"
   SPRING_PROFILES_ACTIVE: ""
   LOGGING_LEVEL_ROOT: "INFO"
@@ -276,8 +282,10 @@ mpesa:
 roster_connector: 
   enabled: false
   replicas: 1
-  image: ""
+  image:
+    tag: "1.0.0"
   imagePullPolicy: "Always"
+  LOGGING_LEVEL_ROOT: "INFO"
   SPRING_PROFILES_ACTIVE: ""
   containerPort: 5000
   limits:
@@ -297,9 +305,11 @@ roster_connector:
 paygops_connector:
   enabled: false
   replicas: 1
-  image: ""
+  image:
+    tag: "1.0.0"
   imagePullPolicy: "Always"
   SPRING_PROFILES_ACTIVE: ""
+  LOGGING_LEVEL_ROOT: "INFO"
   containerPort: 5000
   limits:
     memory: "512M"
@@ -318,7 +328,8 @@ paygops_connector:
 messagegateway:
   enabled: false
   replicas: 1
-  image: ""
+  image:
+    tag: "1.0.0"
   imagePullPolicy: "Always"
   LOGGING_LEVEL_ROOT: "INFO"
   hostname: ""
@@ -350,7 +361,8 @@ messagegateway:
 notifications:
   enabled: false
   replicas: 1
-  image: ""
+  image:
+    tag: "1.0.1"
   imagePullPolicy: "Always"
   SPRING_PROFILES_ACTIVE: ""
   LOGGING_LEVEL_ROOT: "INFO"
@@ -380,7 +392,8 @@ notifications:
 zeebe_ops:
   enabled: false
   replicas: 1
-  image: ""
+  image:
+    tag: "1.0.1"
   imagePullPolicy: "Always"
   SPRING_PROFILES_ACTIVE: ""
   LOGGING_LEVEL_ROOT: "INFO"
@@ -403,8 +416,10 @@ zeebe_ops:
 
 importer_es:
   replicas: 1
-  image: ""
+  image:
+    tag: "1.1.0"
   imagePullPolicy: "Always"
+  LOGGING_LEVEL_ROOT: "INFO"
   limits:
     memory: "512M"
     cpu: "500m"
@@ -432,7 +447,8 @@ kafka:
 importer_rdbms:
   enabled: false
   replicas: 1
-  image: ""
+  image:
+    tag: "1.0.1"
   imagePullPolicy: "Always"
   LOGGING_LEVEL_ROOT: "INFO"
   datasource:
@@ -453,7 +469,8 @@ importer_rdbms:
 connector_bulk:
   enabled: false
   replicas: 1
-  image: ""
+  image:
+    tag: "1.0.0"
   imagePullPolicy: "Always"
   SPRING_PROFILES_ACTIVE: ""
   limits:
@@ -468,7 +485,8 @@ connector_bulk:
 ph_ee_connector_gsma:
   enabled: false
   replicas: 1
-  image: ""
+  image:
+    tag: "1.0.0"
   imagePullPolicy: "Always"
   SPRING_PROFILES_ACTIVE: ""
   limits:
