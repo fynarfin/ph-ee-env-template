@@ -46,67 +46,67 @@ spec:
               memory: "{{ .Values.mpesa.requests.memory }}"
               cpu: "{{ .Values.mpesa.requests.cpu }}"
           env:
-            - name: "SPRING_PROFILES_ACTIVE"
-              value: "{{ .Values.mpesa.SPRING_PROFILES_ACTIVE }}"
-            - name: "ZEEBE_BROKER_CONTACTPOINT"
-              value: "{{ .Values.mpesa.zeebe_broker_contactpoint }}"
-            - name: "MPESA_LOCAL_HOST"
-              value: "{{ .Values.mpesa.callback_host }}"
-            - name: "MPESA_API_TIMEOUT"
-              value: "{{ .Values.mpesa.api_timeout }}"
-            - name: "MPESA_MAX-RETRY-COUNT"
-              value: "{{ .Values.mpesa.retry_count }}"
-            - name: "TENANT"
+            - name: "spring_profiles_active"
+              value: "{{ .Values.mpesa.springProfilesActive }}"
+            - name: "zeebe_broker_contactpoint"
+              value: "{{ .Values.mpesa.zeebeBrokerContactpoint }}"
+            - name: "mpesa_local_host"
+              value: "{{ .Values.mpesa.callbackHost }}"
+            - name: "mpesa_api_timeout"
+              value: "{{ .Values.mpesa.apiTimeout }}"
+            - name: "mpesa_max-retry-count"
+              value: "{{ .Values.mpesa.retryCount }}"
+            - name: "tenant"
               value: "{{ .Values.mpesa.tenant }}"
-            - name: "LOGGING_LEVEL_ROOT"
-              value:  "{{ .Values.mpesa.LOGGING_LEVEL_ROOT }}"
-            - name: "ACCOUNTS_ROSTER_SHORTCODE"
-              value: "{{ .Values.mpesa.accounts.roster.business_short_code }}"
-            - name: "ACCOUNTS_ROSTER_TILL"
+            - name: "logging_level_root"
+              value:  "{{ .Values.mpesa.loggingLevelRoot }}"
+            - name: "accounts_roster_shortcode"
+              value: "{{ .Values.mpesa.accounts.roster.businessShortCode }}"
+            - name: "accounts_roster_till"
               value: "{{ .Values.mpesa.accounts.roster.till }}"
-            - name: "ACCOUNTS_ROSTER_AUTHHOST"
-              value: "{{ .Values.mpesa.accounts.roster.auth_host }}"
-            - name: "ACCOUNTS_ROSTER_APIHOST"
-              value: "{{ .Values.mpesa.accounts.roster.api_host }}"
-            - name: "ACCOUNTS_ROSTER_CLIENTKEY"
+            - name: "accounts_roster_authhost"
+              value: "{{ .Values.mpesa.accounts.roster.authHost }}"
+            - name: "accounts_roster_apihost"
+              value: "{{ .Values.mpesa.accounts.roster.apiHost }}"
+            - name: "accounts_roster_clientkey"
               valueFrom:
                 secretKeyRef:
                   name: "mpesa-secret-roster"
                   key: "client-key"
-            - name: "ACCOUNTS_ROSTER_CLIENTSECRET"
+            - name: "accounts_roster_clientsecret"
               valueFrom:
                 secretKeyRef:
                   name: "mpesa-secret-roster"
                   key: "client-secret"
-            - name: "ACCOUNTS_ROSTER_PASSKEY"
+            - name: "accounts_roster_passkey"
               valueFrom:
                 secretKeyRef:
                   name: "mpesa-secret-roster"
                   key: "pass-key"
-            - name: "ACCOUNTS_PAYGOPS_SHORTCODE"
-              value: "{{ .Values.mpesa.accounts.paygops.business_short_code}}"
-            - name: "ACCOUNTS_PAYGOPS_TILL"
+            - name: "accounts_paygops_shortcode"
+              value: "{{ .Values.mpesa.accounts.paygops.businessShortCode}}"
+            - name: "accounts_paygops_till"
               value: "{{ .Values.mpesa.accounts.paygops.till }}"
-            - name: "ACCOUNTS_PAYGOPS_AUTHHOST"
-              value: "{{ .Values.mpesa.accounts.paygops.auth_host }}"
-            - name: "ACCOUNTS_PAYGOPS_APIHOST"
-              value: "{{ .Values.mpesa.accounts.paygops.api_host }}"
-            - name: "ACCOUNTS_PAYGOPS_CLIENTKEY"
+            - name: "accounts_paygops_authhost"
+              value: "{{ .Values.mpesa.accounts.paygops.authHost }}"
+            - name: "accounts_paygops_apihost"
+              value: "{{ .Values.mpesa.accounts.paygops.apiHost }}"
+            - name: "accounts_paygops_clientkey"
               valueFrom:
                 secretKeyRef:
                   name: "mpesa-secret-paygops"
                   key: "client-key"
-            - name: "ACCOUNTS_PAYGOPS_CLIENTSECRET"
+            - name: "accounts_paygops_clientsecret"
               valueFrom:
                 secretKeyRef:
                   name: "mpesa-secret-paygops"
                   key: "client-secret"
-            - name: "ACCOUNTS_PAYGOPS_PASSKEY"
+            - name: "accounts_paygops_passkey"
               valueFrom:
                 secretKeyRef:
                   name: "mpesa-secret-paygops"
                   key: "pass-key"
-            - name: "SKIP_ENABLED"
+            - name: "skip_enabled"
               value: "{{ .Values.mpesa.skip.enabled }}"
 
 
@@ -134,9 +134,9 @@ metadata:
   name: mpesa-secret-roster
 type: Opaque
 data:
-  client-key: {{ .Values.mpesa.accounts.roster.client_key | b64enc }}
-  client-secret: {{ .Values.mpesa.accounts.roster.client_secret | b64enc }}
-  pass-key: {{ .Values.mpesa.accounts.roster.pass_key | b64enc }}
+  client-key: {{ .Values.mpesa.accounts.roster.clientKey | b64enc }}
+  client-secret: {{ .Values.mpesa.accounts.roster.clientSecret | b64enc }}
+  pass-key: {{ .Values.mpesa.accounts.roster.passKey | b64enc }}
 
 ---
 apiVersion: {{ .Values.secret.apiversion }}
@@ -145,9 +145,9 @@ metadata:
   name: mpesa-secret-paygops
 type: Opaque
 data:
-  client-key: {{ .Values.mpesa.accounts.paygops.client_key | b64enc }}
-  client-secret: {{ .Values.mpesa.accounts.paygops.client_secret | b64enc }}
-  pass-key: {{ .Values.mpesa.accounts.paygops.pass_key | b64enc }}
+  client-key: {{ .Values.mpesa.accounts.paygops.clientKey | b64enc }}
+  client-secret: {{ .Values.mpesa.accounts.paygops.clientSecret | b64enc }}
+  pass-key: {{ .Values.mpesa.accounts.paygops.passKey | b64enc }}
 
 ---
 {{- if .Values.mpesa.ingress.enabled }}

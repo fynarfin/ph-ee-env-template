@@ -34,14 +34,14 @@ spec:
           ports:
             - containerPort: 5000
           env:
-            - name: "ZEEBE_BROKER_CONTACTPOINT"
-              value: "{{ .Values.zeebe_ops.zeebe_broker_contactpoint }}"
+            - name: "zeebe_broker_contactpoint"
+              value: "{{ .Values.zeebe_ops.zeebeBrokerContactpoint }}"
             - name: "TENANTS"
               value: "{{ .Values.zeebe_ops.tenants }}"
-            - name: "LOGGING_LEVEL_ROOT"
-              value:  "{{ .Values.zeebe_ops.LOGGING_LEVEL_ROOT }}"
-            - name: "SPRING_DATA_ELASTICSEARCH_CLIENT_REACTIVE_ENDPOINTS"
-              value: "{{ .Values.zeebe_ops.elasticsearch_contactpoint }}"
+            - name: "logging_level_root"
+              value:  "{{ .Values.zeebe_ops.loggingLevelRoot }}"
+            - name: "spring_data_elasticsearch_client_reactive_endpoints"
+              value: "{{ .Values.zeebe_ops.elasticsearchContactpoint }}"
 ---
 {{- if .Values.zeebe_ops.ingress.enabled }}
 apiVersion: {{ .Values.ingress.apiversion }}
