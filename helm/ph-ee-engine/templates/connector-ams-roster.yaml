@@ -39,21 +39,21 @@ spec:
             initialDelaySeconds: 20
             periodSeconds: 30
           env:
-            - name: "SPRING_PROFILES_ACTIVE"
-              value: "{{ .Values.roster_connector.SPRING_PROFILES_ACTIVE }}"
-            - name: "ZEEBE_BROKER_CONTACTPOINT"
+            - name: "spring_profiles_active"
+              value: "{{ .Values.roster_connector.springProfilesActive }}"
+            - name: "zeebe_broker_contactpoint"
               value: "zeebe-zeebe-gateway:26500"
-            - name: "AMS_LOCAL_ENABLED"
+            - name: "ams_local_enabled"
               value: "{{ .Values.roster_connector.ams.local.enabled }}"
-            - name: "PESACORE_AUTH-HEADER"
+            - name: "pesacore_auth-header"
               valueFrom:
                 secretKeyRef:
                   name: "roster-secret"
                   key: "auth-token"
-            - name: "PESACORE_BASE-URL"
-              value: "{{ .Values.roster_connector.pesacore.base_url }}"
-            - name: "LOGGING_LEVEL_ROOT"
-              value: "{{ .Values.roster_connector.LOGGING_LEVEL_ROOT }}"
+            - name: "pesacore_base-url"
+              value: "{{ .Values.roster_connector.pesacore.baseUrl }}"
+            - name: "logging_level_root"
+              value: "{{ .Values.roster_connector.loggingLevelRoot }}"
           resources:
             limits:
               memory: "{{ .Values.roster_connector.limits.memory }}"
@@ -68,5 +68,5 @@ metadata:
   name: roster-secret
 type: Opaque
 data:
-  auth-token: {{ .Values.roster_connector.pesacore.auth_header | b64enc }}
+  auth-token: {{ .Values.roster_connector.pesacore.authHeader | b64enc }}
 {{- end }}

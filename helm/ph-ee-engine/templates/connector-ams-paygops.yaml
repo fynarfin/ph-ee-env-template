@@ -39,21 +39,21 @@ spec:
             initialDelaySeconds: 20
             periodSeconds: 30
           env:
-            - name: "SPRING_PROFILES_ACTIVE"
-              value: "{{ .Values.paygops_connector.SPRING_PROFILES_ACTIVE }}"
-            - name: "ZEEBE_BROKER_CONTACTPOINT"
+            - name: "spring_profiles_active"
+              value: "{{ .Values.paygops_connector.springProfilesActive }}"
+            - name: "zeebe_broker_contactpoint"
               value: "zeebe-zeebe-gateway:26500"
-            - name: "AMS_LOCAL_ENABLED"
+            - name: "ams_local_enabled"
               value: "{{ .Values.paygops_connector.ams.local.enabled }}"
-            - name: "PAYGOPS_AUTHHEADER"
+            - name: "paygops_authheader"
               valueFrom:
                 secretKeyRef:
                   name: "paygops-secret"
                   key: "auth-token"
-            - name: "PAYGOPS_BASE-URL"
-              value: "{{ .Values.paygops_connector.paygops.base_url }}"
-            - name: "LOGGING_LEVEL_ROOT"
-              value: "{{ .Values.paygops_connector.LOGGING_LEVEL_ROOT }}"
+            - name: "paygops_base-url"
+              value: "{{ .Values.paygops_connector.paygops.baseUrl }}"
+            - name: "logging_level_root"
+              value: "{{ .Values.paygops_connector.loggingLevelRoot }}"
           resources:
             limits:
               memory: "{{ .Values.roster_connector.limits.memory }}"

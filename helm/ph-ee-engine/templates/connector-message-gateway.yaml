@@ -47,31 +47,31 @@ spec:
             periodSeconds: 30
 
           env:
-            - name: "SPRING_DATASOURCE_URL"
-              value: "{{ .Values.messagegateway.DATASOURCE_URL }}"
-            - name: "MYSQL_USERNAME"
-              value: "{{ .Values.messagegateway.MYSQL_USERNAME }}"
-            - name: "MYSQL_PASSWORD"
+            - name: "spring_datasource_url"
+              value: "{{ .Values.messagegateway.datasourceUrl }}"
+            - name: "mysql_username"
+              value: "{{ .Values.messagegateway.mysqlUsername }}"
+            - name: "mysql_password"
               valueFrom:
                 secretKeyRef:
                   name: "messagegateway-secret"
                   key: "database-password"
-            - name: "CALLBACKCONFIG_HOST"
-              value: "{{ .Values.messagegateway.CALLBACKCONFIG_HOST }}"
-            - name: "HOSTCONFIG_HOST"
-              value: "{{ .Values.messagegateway.HOSTCONFIG_HOST }}"
-            - name: "PROVIDERSOURCE_FROMDATABASE"
-              value: "{{ .Values.messagegateway.PROVIDERSOURCE_FROMDATABASE }}"
-            - name: "PROVIDERSOURCE_FROMYML"
-              value: "{{ .Values.messagegateway.PROVIDERSOURCE_FROMYML }}"
-            - name: "LOGGING_LEVEL_ROOT"
-              value: "{{ .Values.messagegateway.LOGGING_LEVEL_ROOT }}"
-            - name: "PROVIDERKEYS_TELERIVETAPIKEY"
+            - name: "callbackconfig_host"
+              value: "{{ .Values.messagegateway.callbackconfigHost }}"
+            - name: "hostconfig_host"
+              value: "{{ .Values.messagegateway.hostconfigHost }}"
+            - name: "providersource_from-database"
+              value: "{{ .Values.messagegateway.providersourceFromdatabase }}"
+            - name: "providersource_from-yml"
+              value: "{{ .Values.messagegateway.providersourceFromyml }}"
+            - name: "logging_level_root"
+              value: "{{ .Values.messagegateway.loggingLevelRoot }}"
+            - name: "providerkeys_telerivet-apikey"
               valueFrom:
                 secretKeyRef:
                   name: "messagegateway-secret"
                   key: "api-key"
-            - name: "PROVIDERKEYS_TELERIVETPROJECTID"
+            - name: "providerkeys_telerivet-projectid"
               valueFrom:
                 secretKeyRef:
                   name: "messagegateway-secret"
@@ -115,9 +115,9 @@ metadata:
   name: messagegateway-secret
 type: Opaque
 data:
-  api-key: "{{ .Values.messagegateway.secret.value.api_key | b64enc }}"
-  project-id: "{{ .Values.messagegateway.secret.value.project_id | b64enc }}"
-  database-password: "{{ .Values.messagegateway.MYSQL_PASSWORD | b64enc }}"
+  api-key: "{{ .Values.messagegateway.secret.value.apiKey | b64enc }}"
+  project-id: "{{ .Values.messagegateway.secret.value.projectId | b64enc }}"
+  database-password: "{{ .Values.messagegateway.mysqlPassword | b64enc }}"
 ---
 {{- if .Values.messagegateway.ingress.enabled }}
 apiVersion: {{ .Values.ingress.apiversion }}
