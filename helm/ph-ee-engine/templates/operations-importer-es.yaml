@@ -27,5 +27,10 @@ spec:
             requests:
               memory: "{{ .Values.importer_es.requests.memory }}"
               cpu: "{{ .Values.importer_es.requests.cpu }}"
+          env:
+          - name: "reporting.enabled"
+            value: "{{ .Values.importer_es.reporting.enabled }}"
+          - name: "logging_level_ROOT"
+            value: "{{ .Values.importer_es.logging.level.root }}"
 
 {{- end }}

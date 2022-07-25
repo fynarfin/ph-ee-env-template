@@ -29,8 +29,8 @@ zeebe-cluster-helm:
 #      value: "false"
     - name: ZEEBE_BROKER_EXECUTION_METRICS_EXPORTER_ENABLED
       value: "true"
-#    - name: ZEEBE_BROKER_EXPORTERS_ELASTICSEARCH_CLASSNAME
-#      value: "hu.dpc.rt.kafkastreamer.exporter.NoOpExporter"
+    - name: ZEEBE_BROKER_EXPORTERS_ELASTICSEARCH_CLASSNAME
+      value: "hu.dpc.rt.kafkastreamer.exporter.NoOpExporter"
     - name: ZEEBE_BROKER_EXPORTERS_ELASTICSEARCH_JARPATH
       value: "/exporters/ph-ee-kafka-exporter.jar"
     - name: ZEEBE_BROKER_EXPORTERS_KAFKA_JARPATH
@@ -449,9 +449,13 @@ importer_es:
   enabled: true
   replicas: 1
   image: ""
-  imageTag: "v1.1.2"
+  imageTag: "v1.1.4"
   imagePullPolicy: "Always"
-  LOGGING_LEVEL_ROOT: "INFO"
+  reporting:
+    enabled: false
+  logging:
+    level:
+      root: "INFO"
   limits:
     memory: "512M"
     cpu: "500m"
