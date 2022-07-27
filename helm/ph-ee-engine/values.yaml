@@ -53,27 +53,13 @@ zeebe-cluster-helm:
       value: 'true'
     - name: ZEEBE_BROKER_EXPORTERS_KAFKA_ARGS_INDEX_INCIDENT
       value: 'true'
-    - name: ZEEBE_BROKER_EXPORTERS_KAFKA_ARGS_INDEX_COMMAND
-      value: 'false'
-    - name: ZEEBE_BROKER_EXPORTERS_KAFKA_ARGS_INDEX_REJECTION
-      value: 'false'
-    - name: ZEEBE_BROKER_EXPORTERS_KAFKA_ARGS_INDEX_JOB
-      value: 'false'
     - name: ZEEBE_BROKER_EXPORTERS_KAFKA_ARGS_INDEX_DEPLOYMENT
       value: 'false'
     - name: ZEEBE_BROKER_EXPORTERS_KAFKA_ARGS_INDEX_ERROR
       value: 'false'
-    - name: ZEEBE_BROKER_EXPORTERS_KAFKA_ARGS_INDEX_JOBBATCH
-      value: 'false'
     - name: ZEEBE_BROKER_EXPORTERS_KAFKA_ARGS_INDEX_JOB
-      value: 'false'
-    - name: ZEEBE_BROKER_EXPORTERS_KAFKA_ARGS_INDEX_MESSAGE
-      value: 'false'
-    - name: ZEEBE_BROKER_EXPORTERS_KAFKA_ARGS_INDEX_MESSAGESUBSCRIPTION
       value: 'false'
     - name: ZEEBE_BROKER_EXPORTERS_KAFKA_ARGS_INDEX_VARIABLEDOCUMENT
-      value: 'false'
-    - name: ZEEBE_BROKER_EXPORTERS_KAFKA_ARGS_INDEX_JOB
       value: 'false'
     - name: ZEEBE_BROKER_EXPORTERS_KAFKA_ARGS_INDEX_WORKFLOWINSTANCE
       value: 'false'
