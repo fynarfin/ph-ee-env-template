@@ -546,6 +546,11 @@ connector_bulk:
   requests:
     memory: "512M"
     cpu: "100m"
+  ingress:
+    enabled: true
+    path: "/connectorbulk"
+    annotations: {}
+    backend: {}
   deployment:
     annotations: {}
 
