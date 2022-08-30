@@ -598,7 +598,39 @@ connector_bulk:
   image: ""
   imageTag: "v1.0.0"
   imagePullPolicy: "Always"
-  SPRING_PROFILES_ACTIVE: ""
+  SPRING_PROFILES_ACTIVE: "default"
+  zeebe_broker_contactpoint: "zeebe-zeebe-gateway:26500"
+  tenants: ""
+  bucket_name: ""
+  operations_app:
+    contactpoint: ""
+    endpoints:
+      batch_transaction: ""
+  config:
+    partylookup:
+      enable: false
+    approval:
+      enable: false
+    ordering:
+      enable: false
+      field: ""
+    splitting:
+      enable: true
+      sub_batch_size: 5
+    formatting:
+      enable: false
+      standard: "DEFAULT"
+    mergeback:
+      enable: false
+    backpressure:
+      enable: false
+    success_threshold_check:
+      enable: false
+      success_rate: 95
+  aws:
+    region: ""
+    access_key: ""
+    secret_key: ""
   limits:
     memory: "512M"
     cpu: "500m"
@@ -630,6 +662,29 @@ ph_ee_connector_slcb:
   image: ""
   imagePullPolicy: "Always"
   SPRING_PROFILES_ACTIVE: ""
+  zeebe_broker_contactpoint: "zeebe-zeebe-gateway:26500"
+  username: ""
+  password: ""
+  signature_key: ""
+  auth_host: ""
+  api_host: ""
+  account_number: ""
+  account_type: ""
+  institutioncode: ""
+  endpoint:
+    auth: ""
+    transaction_request: ""
+    reconciliation: ""
+    account_balance: ""
+  config:
+    date_format: ""
+    reconciliation:
+      enable: false
+  aws:
+    bucket_name: ""
+    region: ""
+    access_key: ""
+    secret_key: ""
   limits:
     memory: "512M"
     cpu: "500m"
