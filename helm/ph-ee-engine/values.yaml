@@ -99,18 +99,33 @@ zeebe-cluster-helm:
       - name: exporters
         mountPath: /exporters/
 
-# payment hub Operate, ES and Kibana
-zeebe-operate-helm:
-  enabled: false
-  image:
-    repository: camunda/operate
-    tag: 1.1.0
-  fullnameOverride: "zeebe-operate"
-  global:
-    zeebe: "zeebe-zeebe"
-    elasticsearch:
-      host: "zeebe-elasticsearch"
-      clusterName: "zeebe-elasticsearch"
+camunda-platform:
+  zeebe:
+    enabled: false
+  zeebe-gateway:
+    enabled: false
+  operate:
+    enabled: true
+    image:
+      repository: camunda/operate
+      tag: 8.0.13
+    fullnameOverride: "zeebe-operate"
+    global:
+      zeebe: "zeebe-zeebe"
+      elasticsearch:
+        host: "ph-ee-elasticsearch"
+        clusterName: "ph-ee-elasticsearch"
+  tasklist:
+    enabled: false
+  optimize:
+    enabled: false
+  prometheusServiceMonitor:
+    enabled: false
+  identity:
+    enabled: false
+  elasticsearch:
+    enabled: false
+
 
 elasticsearch:
   enabled: true
