@@ -104,3 +104,34 @@ spec:
   type: ClusterIP
 
 {{- end}}
+
+
+
+{{- if .Values.zeebe-operate.ingress.enabled }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: zeebe-operate
+  namespace: "{{ .Values.namespace }}"
+  annotations:
+{{- if .Values.zeebe-operate.ingress.annotations }}
+{{ toYaml .Values.zeebe-operate.ingress.annotations | indent 4 }}
+{{- end }}
+spec:
+  rules:
+    - host: "{{ .Values.zeebe-operate.ingress.hostname }}"
+      http:
+        paths:
+          - path: "{{ .Values.zeebe-operate.ingress.path }}"
+            pathType: Prefix
+            backend:
+              service:
+                name: "{{ .Values.zeebe-operate.ingress.backend.service.name }}"
+                port: 
+                  number: {{ .Values.zeebe-operate.ingress.backend.service.port.number }}
+  tls:
+    - hosts:
+        - "{{ .Values.wildcardhostname }}"
+      secretName: "{{ .Values.tls }}"
+{{- end }}
+{{- end}}
