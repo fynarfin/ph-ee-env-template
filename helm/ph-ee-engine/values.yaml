@@ -683,3 +683,16 @@ ph_ee_connector_slcb:
 wildcardhostname: ""
 
 tls: ""
+
+zeebe-operate:
+  ingress:
+    enabled: true
+    hostname: "zeebeoperate.sandbox.fynarfin.io"
+    annotations:
+      kubernetes.io/ingress.class: "nginx"
+    path: "/"
+    backend:
+      service:
+        name: "zeebe-operate"
+        port:
+          number: 80
