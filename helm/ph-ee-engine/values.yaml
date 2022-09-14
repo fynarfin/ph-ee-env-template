@@ -9,8 +9,8 @@ zeebe-cluster-helm:
       host: "ph-ee-elasticsearch"
 
   image:
-    repository: camunda/operate
-    tag: 8.0.13
+    repository: camunda/zeebe
+    tag: 1.1.0
 
   clusterSize: "1"
   partitionCount: "1"
