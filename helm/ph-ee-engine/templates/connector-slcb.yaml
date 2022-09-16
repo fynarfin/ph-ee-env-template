@@ -109,7 +109,8 @@ data:
   slcb-username: {{ .Values.connector_bulk.username | b64enc }}
   slcb-password: {{ .Values.connector_bulk.password | b64enc }}
   slcb-signature-key: {{ .Values.connector_bulk.signature_key | b64enc }}
----apiVersion: {{ .Values.service.apiversion }}
+---
+apiVersion: {{ .Values.service.apiversion }}
 kind: Service
 metadata:
   labels:

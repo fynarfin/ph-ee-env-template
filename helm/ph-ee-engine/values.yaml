@@ -599,13 +599,14 @@ connector_bulk:
   imageTag: "v1.0.0"
   imagePullPolicy: "Always"
   SPRING_PROFILES_ACTIVE: "default"
+  hostname: "bulk-connector.sandbox.fynarfin.io"
   zeebe_broker_contactpoint: "zeebe-zeebe-gateway:26500"
   tenants: ""
-  bucket_name: ""
+  bucket_name: "paymenthub-ee-dev"
   operations_app:
-    contactpoint: ""
-    endpoints:
-      batch_transaction: ""
+      contactpoint: "https://ops-bk.sandbox.fynarfin.io/"
+      endpoints:
+        batch_transaction: "/api/v1/batch/transactions"
   config:
     partylookup:
       enable: false
@@ -621,16 +622,16 @@ connector_bulk:
       enable: false
       standard: "DEFAULT"
     mergeback:
-      enable: false
+      enable: true
     backpressure:
       enable: false
     success_threshold_check:
-      enable: false
+      enable: true
       success_rate: 95
   aws:
-    region: ""
-    access_key: ""
-    secret_key: ""
+    region: "us-east-2"
+    access_key: "access-key"
+    secret_key: "secret-key"
   limits:
     memory: "512M"
     cpu: "500m"
@@ -663,28 +664,28 @@ ph_ee_connector_slcb:
   imagePullPolicy: "Always"
   SPRING_PROFILES_ACTIVE: ""
   zeebe_broker_contactpoint: "zeebe-zeebe-gateway:26500"
-  username: ""
-  password: ""
-  signature_key: ""
-  auth_host: ""
-  api_host: ""
-  account_number: ""
-  account_type: ""
-  institutioncode: ""
+  username: "username"
+  password: "password"
+  signature_key: "long_segnature_key"
+  auth_host: "https://g2p-test.slcb.com:8443"
+  api_host: "https://g2p-test.slcb.com:8443"
+  account_number: "003001003879112168"
+  account_type: 0
+  institutioncode: "SLCB"
   endpoint:
-    auth: ""
-    transaction_request: ""
-    reconciliation: ""
-    account_balance: ""
+    auth: "/api/auth"
+    transaction_request: "/api/transactionRequest"
+    reconciliation: "/reconciliation"
+    account_balance: "/accountBalance"
   config:
-    date_format: ""
+    date_format: "yyyy-MM-dd'T'hh:mm:ssXXX"
     reconciliation:
       enable: false
   aws:
-    bucket_name: ""
-    region: ""
-    access_key: ""
-    secret_key: ""
+    bucket_name: "paymenthub-ee-dev"
+    region: "us-east-2"
+    access_key: "access-key"
+    secret_key: "secret-key"
   limits:
     memory: "512M"
     cpu: "500m"
