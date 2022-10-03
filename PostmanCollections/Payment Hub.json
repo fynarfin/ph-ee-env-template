@@ -42826,7 +42826,7 @@
 									"key": "data",
 									"description": "CSV file conisiting of transaction details. CSV format: \"id\", \"request_id\", \"payment_mode\", \"account_number\", \"amount\", \"currency\", \"note\" in the given order. ",
 									"type": "file",
-									"src": "{{batchFilePath}}"
+									"src": "/Users/danishjamal/Documents/Fynarfin/bulk/new/ph-ee-bulk-demo-6.csv"
 								},
 								{
 									"key": "requestId",
@@ -42917,8 +42917,24 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    pm.expect(pm.response.text).not.equal(null)",
+									"});",
 									"var jsonData = JSON.parse(responseBody);",
-									"postman.setEnvironmentVariable(\"batchId\", jsonData.batch_id);"
+									"postman.setEnvironmentVariable(\"batchId\", jsonData.batch_id);",
+									"",
+									"if(postman.getEnvironmentVariable(\"AutoTest\") == \"true\"){",
+									"    var nextTextIndex = Number(postman.getEnvironmentVariable(\"NextTestIndex\"));",
+									"    var apis = pm.environment.get('TestApiList');",
+									"    var testList = JSON.parse(apis);",
+									"    if(testList.length>nextTextIndex){",
+									"        postman.setEnvironmentVariable(\"NextTestIndex\", 1+ nextTextIndex);",
+									"        postman.setNextRequest(testList[nextTextIndex]); ",
+									"    }else{",
+									"        postman.setNextRequest(null); ",
+									"    }",
+									"}"
 								],
 								"type": "text/javascript"
 							}
@@ -42953,8 +42969,8 @@
 							"formdata": [
 								{
 									"key": "data",
-									"type": "file",
-									"src": "{{batchFilePath}}"
+									"value": "https://raw.githubusercontent.com/fynarfin/ph-ee-env-template/master/PostmanCollections/ph-ee-bulk-demo-6.csv",
+									"type": "text"
 								}
 							]
 						},
