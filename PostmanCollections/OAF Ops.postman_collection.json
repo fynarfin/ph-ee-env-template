@@ -1,0 +1,184 @@
+{
+	"info": {
+		"_postman_id": "77ce9693-d08e-4b2d-a2ff-b89b3a27a03d",
+		"name": "OAF Ops",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Transfers",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:90.0) Gecko/20100101 Firefox/90.0",
+						"disabled": true
+					},
+					{
+						"key": "Accept",
+						"value": "application/json, text/plain, */*",
+						"disabled": true
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en-US,en;q=0.5",
+						"disabled": true
+					},
+					{
+						"key": "Platform-TenantId",
+						"value": "oaf"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiaWRlbnRpdHktcHJvdmlkZXIiLCJvYWYiXSwidXNlcl9uYW1lIjoibWlmb3MiLCJzY29wZSI6WyJpZGVudGl0eSJdLCJleHAiOjE2NDI2NzA0MTcsImF1dGhvcml0aWVzIjpbIlJFRlVORCIsIkFMTF9GVU5DVElPTlMiXSwianRpIjoiQStsajFsRVNsWW9YMU9uNjdyTlNRbFhHY05VPSIsImNsaWVudF9pZCI6ImNsaWVudCJ9.flZD_GlQJ2w8P_cU0DC2hojJLUA9WS_Bc3yy9X-1v8hR1xhJZjdHUKfBl-TqNdwPnWHEvuKNdsGSEzNCP8CYR71n3J33gzEpcKVZ0P7d2bOOLX6EgtSjDdjSLU_IGRxmOZEGES9p-UPAARbj24vIM3kugG6jBbVTJ08DksnLRXP0MdWjAmW6JNq0Y2VAJq_0LSCdab5XZT-vQsRL5PdrKvPT1w28jDFklWCrft6G-6SQbqkJPGR_oQPwYBmaZOx5ateE6JDMZN5CVmejExRVPYgE-tMxXRh7GZFTDaSW1DiMzNriBeDSu3NUkuwOCC4B4Z-XmzQJw36uE6pvqGT-Pg"
+					},
+					{
+						"key": "Origin",
+						"value": "http://localhost:4200",
+						"disabled": true
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive",
+						"disabled": true
+					},
+					{
+						"key": "Referer",
+						"value": "http://localhost:4200/",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "https://paymenthub.qa.oneacrefund.org/opsapp/api/v1/transfers?size=10&page=1",
+					"protocol": "https",
+					"host": [
+						"paymenthub",
+						"qa",
+						"oneacrefund",
+						"org"
+					],
+					"path": [
+						"opsapp",
+						"api",
+						"v1",
+						"transfers"
+					],
+					"query": [
+						{
+							"key": "direction",
+							"value": "OUTGOING",
+							"description": "INCOMING or OUTGOING direction",
+							"disabled": true
+						},
+						{
+							"key": "status",
+							"value": "{{status}}",
+							"description": "Transaction Status. Values can be COMPLETED, FAILED, IN_PROGRESS and ALL. By default set to ALL.",
+							"disabled": true
+						},
+						{
+							"key": "size",
+							"value": "10"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Authorization",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:96.0) Gecko/20100101 Firefox/96.0",
+						"disabled": true
+					},
+					{
+						"key": "Accept",
+						"value": "application/json, text/plain, */*",
+						"disabled": true
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en-US,en;q=0.5",
+						"disabled": true
+					},
+					{
+						"key": "Accept-Encoding",
+						"value": "gzip, deflate",
+						"disabled": true
+					},
+					{
+						"key": "Platform-TenantId",
+						"value": "oaf"
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic Y2xpZW50Og=="
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"disabled": true
+					},
+					{
+						"key": "Origin",
+						"value": "http://localhost:4200",
+						"disabled": true
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive",
+						"disabled": true
+					},
+					{
+						"key": "Referer",
+						"value": "http://localhost:4200/",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{}"
+				},
+				"url": {
+					"raw": "https://paymenthub.qa.oneacrefund.org/opsapp/oauth/token?username=mifos&password=password&grant_type=password",
+					"protocol": "https",
+					"host": [
+						"paymenthub",
+						"qa",
+						"oneacrefund",
+						"org"
+					],
+					"path": [
+						"opsapp",
+						"oauth",
+						"token"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "mifos"
+						},
+						{
+							"key": "password",
+							"value": "password"
+						},
+						{
+							"key": "grant_type",
+							"value": "password"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
