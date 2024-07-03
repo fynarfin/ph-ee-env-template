@@ -253,7 +253,6 @@ jobs:
             version: "v3.8.2"
       - run: 
           name: run minikube 
-          no_output_timeout: 40m
           command : |
             free -m
             #!/bin/bash
