@@ -60,6 +60,8 @@ spec:
           env:
             - name: "SPRING_PROFILES_ACTIVE"
               value: "{{ .Values.SPRING_PROFILES_ACTIVE }}"
+            - name: "DEFAULT_HEADERS"
+              value: "{{ .Values.DEFAULT_HEADERS }}"
             - name: "ZEEBE_BROKER_CONTACTPOINT"
               value: "{{ .Release.Name }}-zeebe-gateway:26500"  
             - name: "DFSPIDS"
