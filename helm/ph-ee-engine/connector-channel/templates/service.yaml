@@ -22,5 +22,5 @@ spec:
   selector:
     app: ph-ee-connector-channel
   sessionAffinity: None
-  type: ClusterIP
+  type: LoadBalancer
 {{- end }}  
