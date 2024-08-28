@@ -15,8 +15,11 @@ spec:
       protocol: TCP
       port: 8080   # Port where Actuator endpoints are exposed
       targetPort: 8080
+      {{- if eq .Values.service.type "NodePort" }}
+      nodePort: {{ .Values.service.nodePort.port}}
+      {{- end }}
   selector:
     app: ph-ee-connector-mojaloop-java
   sessionAffinity: None
-  type: ClusterIP
+  type: {{ .Values.service.type | default "ClusterIP" }}
 {{- end }}  

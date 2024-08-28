@@ -10,4 +10,8 @@ spec:
     - protocol: TCP
       port: 4200
       targetPort: 80
+      {{- if eq .Values.service.type "NodePort" }}
+      nodePort: {{ .Values.service.nodePort.port}}
+      {{- end }}
+  type: {{ .Values.service.type | default "ClusterIP" }}
 {{- end }}      

@@ -15,6 +15,9 @@ spec:
       port: 8443
       protocol: TCP
       targetPort: 8443
+      {{- if eq .Values.service.type "NodePort" }}
+      nodePort: {{ .Values.service.nodePort.port}}
+      {{- end }}
     - name: http
       port: 82
       protocol: TCP
@@ -22,5 +25,5 @@ spec:
   selector:
     app: ph-ee-connector-channel
   sessionAffinity: None
-  type: ClusterIP
+  type: {{ .Values.service.type | default "ClusterIP" }}
 {{- end }}  

@@ -15,8 +15,11 @@ spec:
       port: 8443
       protocol: TCP
       targetPort: 8443
+      {{- if eq .Values.service.type "NodePort" }}
+      nodePort: {{ .Values.service.nodePort.port}}
+      {{- end }}
   selector:
     app: ph-ee-connector-bulk
   sessionAffinity: None
-  type: ClusterIP
+  type: {{ .Values.service.type | default "ClusterIP" }}
 {{- end }}

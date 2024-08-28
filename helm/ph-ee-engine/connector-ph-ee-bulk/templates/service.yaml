@@ -11,9 +11,12 @@ spec:
       port: 80
       protocol: TCP
       targetPort: 8080
+      {{- if eq .Values.service.type "NodePort" }}
+      nodePort: {{ .Values.service.nodePort.port}}
+      {{- end }}
 
   selector:
     app: ph-ee-connector
   sessionAffinity: None
-  type: ClusterIP
+  type: {{ .Values.service.type | default "ClusterIP" }}
 {{- end }}
