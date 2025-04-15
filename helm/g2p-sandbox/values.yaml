@@ -75,7 +75,7 @@ ph-ee-engine:
         memory: "1024M"
     volumeClaimTemplate:
       accessModes: [ "ReadWriteOnce" ]
-      storageClassName: "gp2"
+      storageClassName: "gp3"
       resources:
         requests:
           storage: 10Gi
